@@ -96,11 +96,6 @@ MODULES_EXCLUDE_FAILING="\
 !flink-formats/flink-avro,\
 !flink-scala-shell"
 
-if [[ $STAGE == $STAGE_TESTS ]]; then
-    echo "Skip this stage because none of the tests would pass with Java 9."
-    exit 0
-fi
-
 if [[ ${PROFILE} == *"include-kinesis"* ]]; then
     MODULES_CONNECTORS="$MODULES_CONNECTORS,flink-connectors/flink-connector-kinesis"
 fi

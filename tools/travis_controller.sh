@@ -86,6 +86,11 @@ if [ $? != 0 ]; then
 fi
 echo "Current stage: \"$STAGE\""
 
+if [[ $STAGE == $STAGE_TESTS ]]; then
+    echo "Skip this stage because none of the tests would pass with Java 9."
+    exit 0
+fi
+
 EXIT_CODE=0
 
 git clone --single-branch -b master https://github.com/apache/flink
