@@ -22,6 +22,7 @@ import org.apache.flink.cep.pattern.Pattern;
 import org.apache.flink.streaming.api.datastream.DataStream;
 
 /**
+ *
  * Utility class for complex event processing.
  *
  * <p>Methods which transform a {@link DataStream} into a {@link PatternStream} to do CEP.
