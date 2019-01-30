@@ -466,31 +466,31 @@ under the License.
 					<reuseForks>false</reuseForks>
 				</configuration>
 			</plugin>
-			<plugin>
-				<!-- Description: https://github.com/ktoso/maven-git-commit-id-plugin
-					Used to show the git ref when starting the jobManager. -->
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<version>2.1.5</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>revision</goal>
-						 </goals>
-					</execution>
-				</executions>
-				<configuration>
-					<dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
-					<generateGitPropertiesFile>true</generateGitPropertiesFile>
-					<skipPoms>false</skipPoms>
-					<failOnNoGitDirectory>false</failOnNoGitDirectory>
-					<generateGitPropertiesFilename>src/main/resources/.version.properties</generateGitPropertiesFilename>
-					<gitDescribe>
-						<!-- don't generate the describe property -->
-						<skip>true</skip>
-					</gitDescribe>
-				</configuration>
-			</plugin>
+			<!--<plugin>-->
+				<!--&lt;!&ndash; Description: https://github.com/ktoso/maven-git-commit-id-plugin-->
+					<!--Used to show the git ref when starting the jobManager. &ndash;&gt;-->
+				<!--<groupId>pl.project13.maven</groupId>-->
+				<!--<artifactId>git-commit-id-plugin</artifactId>-->
+				<!--<version>2.1.5</version>-->
+				<!--<executions>-->
+					<!--<execution>-->
+						<!--<goals>-->
+							<!--<goal>revision</goal>-->
+						 <!--</goals>-->
+					<!--</execution>-->
+				<!--</executions>-->
+				<!--<configuration>-->
+					<!--<dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>-->
+					<!--<generateGitPropertiesFile>true</generateGitPropertiesFile>-->
+					<!--<skipPoms>false</skipPoms>-->
+					<!--<failOnNoGitDirectory>false</failOnNoGitDirectory>-->
+					<!--<generateGitPropertiesFilename>src/main/resources/.version.properties</generateGitPropertiesFilename>-->
+					<!--<gitDescribe>-->
+						<!--&lt;!&ndash; don't generate the describe property &ndash;&gt;-->
+						<!--<skip>true</skip>-->
+					<!--</gitDescribe>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
 			<!-- Add version to jar http://stackoverflow.com/questions/2712970/how-to-get-maven-artifact-version-at-runtime
 				-->
 			<plugin>
