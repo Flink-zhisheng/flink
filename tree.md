@@ -1,3 +1,6 @@
+Blink 源码的目录结构
+
+```
 .
 ├── build-target
 ├── docs
@@ -29,7 +32,6 @@
 │   ├── flink-connector-elasticsearch6
 │   ├── flink-connector-filesystem
 │   ├── flink-connector-hive
-│   ├── flink-connector-kafka
 │   ├── flink-connector-kafka-0.10
 │   ├── flink-connector-kafka-0.11
 │   ├── flink-connector-kafka-0.8
@@ -165,3 +167,4 @@
     ├── force-shading
     ├── maven
     └── releasing
+```
