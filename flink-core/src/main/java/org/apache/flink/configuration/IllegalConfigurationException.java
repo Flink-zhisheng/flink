@@ -25,6 +25,7 @@ import org.apache.flink.annotation.PublicEvolving;
  * the values in a given {@link Configuration} are not valid. This may refer
  * to the Flink configuration with which the framework is started,
  * or a Configuration passed internally between components.
+ *
  */
 @PublicEvolving
 public class IllegalConfigurationException extends RuntimeException {

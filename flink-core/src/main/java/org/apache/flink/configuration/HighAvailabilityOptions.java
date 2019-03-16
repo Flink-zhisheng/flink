@@ -26,6 +26,7 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
  * The set of configuration options relating to high-availability settings.
+ * HA 配置
  */
 @PublicEvolving
 @ConfigGroups(groups = {

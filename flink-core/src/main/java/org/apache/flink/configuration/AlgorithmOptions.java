@@ -22,6 +22,7 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
  * Configuration parameters for join/sort algorithms.
+ *
  */
 public class AlgorithmOptions {
 

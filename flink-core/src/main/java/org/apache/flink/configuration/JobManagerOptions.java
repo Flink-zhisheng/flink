@@ -24,6 +24,7 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
  * Configuration options for the JobManager.
+ * JobManager 的配置
  */
 @PublicEvolving
 public class JobManagerOptions {
@@ -90,9 +91,11 @@ public class JobManagerOptions {
 			.withDescription("The maximum number of prior execution attempts kept in history.");
 
 	/**
-	 * The strategy to handle task failures.
+	 * The strategy to handle task failures. 处理任务失败的策略
 	 * 'full' failover strategy will restart all tasks in the job.
+	 * 默认是 full，出现故障将重新启动作业中的所有任务
 	 * 'region' failover strategy will restart the tasks in the same region with the failed task.
+	 * 如果是 region，让失败的任务在同一个 region 重新启动
 	 * Regions are PIPELINED connected task groups in a job.
 	 */
 	public static final ConfigOption<String> EXECUTION_FAILOVER_STRATEGY =
@@ -105,6 +108,7 @@ public class JobManagerOptions {
 
 	/**
 	 * The maximum number that a region can attempt to restart before triggering job failures.
+	 * 在作业失败之前，region 可以尝试重新启动的最大次数
 	 */
 	public static final ConfigOption<Integer> EXECUTION_FAILOVER_STRATEGY_REGION_MAX_ATTEMPTS =
 		key("jobmanager.execution.failover-strategy.region.attempts")
@@ -142,6 +146,7 @@ public class JobManagerOptions {
 	/**
 	 * The job store cache size in bytes which is used to keep completed
 	 * jobs in memory.
+	 * 作业存储缓存的大小(以字节为单位)，将已完成的作业存在内存中
 	 */
 	public static final ConfigOption<Long> JOB_STORE_CACHE_SIZE =
 		key("jobstore.cache-size")

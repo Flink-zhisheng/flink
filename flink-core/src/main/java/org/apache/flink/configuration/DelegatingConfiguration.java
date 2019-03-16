@@ -34,6 +34,7 @@ import java.util.Set;
 
 /**
  * A configuration that manages a subset of keys with a common prefix from a given configuration.
+ *
  */
 public final class DelegatingConfiguration extends Configuration {
 

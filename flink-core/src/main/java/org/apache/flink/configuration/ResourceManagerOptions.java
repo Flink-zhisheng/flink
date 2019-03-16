@@ -24,6 +24,7 @@ import org.apache.flink.annotation.docs.ConfigGroups;
 
 /**
  * The set of configuration options relating to the ResourceManager.
+ * 与 ResourceManager 相关的一组配置选项
  */
 @PublicEvolving
 @ConfigGroups(groups = {

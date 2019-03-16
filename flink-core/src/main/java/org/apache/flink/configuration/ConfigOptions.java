@@ -48,6 +48,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
  *     .defaultValue(0.9).
  *     .withDeprecatedKeys("cpu.threshold");
  * }</pre>
+ *
  */
 @PublicEvolving
 public class ConfigOptions {

@@ -38,6 +38,8 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
+ * 轻量的配置对象，存储 KV 数据
+ *
  * Lightweight configuration object which stores key/value pairs.
  */
 @Public

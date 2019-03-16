@@ -24,6 +24,8 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
  * Configuration parameters for REST communication.
+ *
+ * 用于 REST 通信的配置参数。
  */
 @Internal
 public class RestOptions {

@@ -25,6 +25,8 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
  * Configuration options for the WebRuntimeMonitor.
+ *
+ * WebRuntimeMonitor 的配置选项
  */
 @PublicEvolving
 public class WebOptions {
@@ -75,6 +77,8 @@ public class WebOptions {
 
 	/**
 	 * The config parameter defining the flink web directory to be used by the webmonitor.
+	 *
+	 * //见博客：http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/
 	 */
 	@Documentation.OverrideDefault("System.getProperty(\"java.io.tmpdir\")")
 	public static final ConfigOption<String> TMP_DIR =
@@ -85,6 +89,8 @@ public class WebOptions {
 	/**
 	 * The config parameter defining the directory for uploading the job jars. If not specified a dynamic directory
 	 * will be used under the directory specified by JOB_MANAGER_WEB_TMPDIR_KEY.
+	 *
+	 * //见博客：http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/
 	 */
 	public static final ConfigOption<String> UPLOAD_DIR =
 		key("web.upload.dir")
@@ -101,6 +107,8 @@ public class WebOptions {
 
 	/**
 	 * The log file location (may be in /log for standalone but under log directory when using YARN).
+	 *
+	 * 优先 log.file
 	 */
 	public static final ConfigOption<String> LOG_PATH =
 		key("web.log.path")

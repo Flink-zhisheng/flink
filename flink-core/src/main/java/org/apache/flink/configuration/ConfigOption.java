@@ -33,6 +33,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
  * <p>{@code ConfigOptions} are built via the {@link ConfigOptions} class.
  * Once created, a config option is immutable.
  *
+ *
  * @param <T> The type of value associated with the configuration option.
  */
 @PublicEvolving

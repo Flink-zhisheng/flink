@@ -24,6 +24,7 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
  * The set of configuration options relating to the HistoryServer.
+ * HistoryServer 的配置
  */
 @PublicEvolving
 public class HistoryServerOptions {

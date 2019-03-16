@@ -24,6 +24,7 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
  * The set of configuration options relating to TaskManager and Task settings.
+ * TaskManager 相关的配置
  */
 @PublicEvolving
 public class TaskManagerOptions {

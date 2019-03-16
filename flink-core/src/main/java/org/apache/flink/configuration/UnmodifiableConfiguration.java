@@ -25,6 +25,7 @@ import java.util.Properties;
 
 /**
  * Unmodifiable version of the Configuration class.
+ *
  */
 @Public
 public class UnmodifiableConfiguration extends Configuration {

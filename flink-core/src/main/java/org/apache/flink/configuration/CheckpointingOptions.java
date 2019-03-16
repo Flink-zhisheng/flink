@@ -21,6 +21,7 @@ package org.apache.flink.configuration;
 /**
  * A collection of all configuration options that relate to checkpoints
  * and savepoints.
+ * checkpoints 和 savepoints 的配置
  */
 public class CheckpointingOptions {
 
@@ -28,7 +29,9 @@ public class CheckpointingOptions {
 	//  general checkpoint and state backend options
 	// ------------------------------------------------------------------------
 
-	/** The state backend to be used to store and checkpoint state. */
+	/** The state backend to be used to store and checkpoint state.
+	 * 三种情况：jobmanager、filesystem、rocksdb
+	 * */
 	public static final ConfigOption<String> STATE_BACKEND = ConfigOptions
 			.key("state.backend")
 			.noDefaultValue()
@@ -56,6 +59,8 @@ public class CheckpointingOptions {
 	/** Option whether the state backend should create incremental checkpoints,
 	 * if possible. For an incremental checkpoint, only a diff from the previous
 	 * checkpoint is stored, rather than the complete checkpoint state.
+	 *
+	 * 增量的 checkpoints
 	 *
 	 * <p>Some state backends may not support incremental checkpoints and ignore
 	 * this option.*/

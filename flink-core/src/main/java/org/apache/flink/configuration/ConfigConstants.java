@@ -29,6 +29,7 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 /**
  * This class contains all constants for the configuration. That includes the configuration keys and
  * the default values.
+ *
  */
 @Public
 @SuppressWarnings("unused")
@@ -56,6 +57,10 @@ public final class ConfigConstants {
 	 * be "failurerate", "failure-rate" to use FailureRateRestartStrategy. You can also
 	 * specify a class name which implements the RestartStrategy interface and has a static
 	 * create method which takes a Configuration object.
+	 *
+	 * off、none、disable、fixeddelay、failurerate、
+	 *
+	 * 你也可以自己实现 RestartStrategy 接口来创建新的重启策略
 	 */
 	@PublicEvolving
 	public static final String RESTART_STRATEGY = "restart-strategy";

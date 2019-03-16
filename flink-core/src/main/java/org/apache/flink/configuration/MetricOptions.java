@@ -23,6 +23,8 @@ import org.apache.flink.annotation.PublicEvolving;
 import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
+ * metrics 的配置和上报
+ *
  * Configuration options for metrics and metric reporters.
  */
 @PublicEvolving

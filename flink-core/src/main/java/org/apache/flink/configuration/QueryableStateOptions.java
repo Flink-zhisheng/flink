@@ -24,6 +24,7 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
  * The set of configuration options relating to Queryable State.
+ *
  */
 @PublicEvolving
 public class QueryableStateOptions {

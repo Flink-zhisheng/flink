@@ -29,6 +29,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
 /**
  * MemorySize is a representation of a number of bytes, viewable in different units.
  *
+ *
  * <h2>Parsing</h2>
  *
  * <p>The size can be parsed from a text expression. If the expression is a pure number,

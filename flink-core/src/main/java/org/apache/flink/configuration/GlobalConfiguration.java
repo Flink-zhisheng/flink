@@ -34,6 +34,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
+ * Flink 的全局配置
+ *
  * Global configuration object for Flink. Similar to Java properties configuration
  * objects it includes key-value pairs which represent the framework's configuration.
  */
@@ -57,6 +59,8 @@ public final class GlobalConfiguration {
 	// --------------------------------------------------------------------------------------------
 
 	/**
+	 * 从环境变量里面加载全局配置
+	 *
 	 * Loads the global configuration from the environment. Fails if an error occurs during loading. Returns an
 	 * empty configuration object if the environment variable is not set. In production this variable is set but
 	 * tests and local execution/debugging don't have this environment variable set. That's why we should fail
@@ -72,6 +76,8 @@ public final class GlobalConfiguration {
 	}
 
 	/**
+	 * 根据给定的配置文件目录加载配置（内部调用 loadConfiguration 方法）
+	 *
 	 * Loads the configuration files from the specified directory.
 	 *
 	 * <p>YAML files are supported as configuration files.
@@ -84,6 +90,8 @@ public final class GlobalConfiguration {
 	}
 
 	/**
+	 * 最终的 loadConfiguration 方法，通过该方法根据给定的目录文件夹来加载配置文件，如果还有动态的配置，则追加
+	 *
 	 * Loads the configuration files from the specified directory. If the dynamic properties
 	 * configuration is not null, then it is added to the loaded configuration.
 	 *
@@ -113,6 +121,7 @@ public final class GlobalConfiguration {
 					"' (" + confDirFile.getAbsolutePath() + ") does not exist.");
 		}
 
+		//加载 yaml 文件
 		Configuration configuration = loadYAMLResource(yamlConfigFile);
 
 		if (dynamicProperties != null) {
@@ -139,6 +148,8 @@ public final class GlobalConfiguration {
 	}
 
 	/**
+	 * 解析 YAML 文件的配置
+	 *
 	 * Loads a YAML-file of key-value pairs.
 	 *
 	 * <p>Colon and whitespace ": " separate key and value (one per line). The hash tag "#" starts a single-line comment.
@@ -203,6 +214,8 @@ public final class GlobalConfiguration {
 	}
 
 	/**
+	 * 检查配置文件中的 key 是不是敏感字段（password, secret）
+	 *
 	 * Check whether the key is a hidden key.
 	 *
 	 * @param key the config key

@@ -24,6 +24,7 @@ import java.io.File;
 
 /**
  * Utility class for {@link Configuration} related helper functions.
+ *
  */
 public class ConfigurationUtils {
 

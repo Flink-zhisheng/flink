@@ -27,6 +27,7 @@ import static org.apache.flink.configuration.ConfigOptions.key;
 
 /**
  * The set of configuration options for core parameters.
+ *
  */
 @PublicEvolving
 @ConfigGroups(groups = {

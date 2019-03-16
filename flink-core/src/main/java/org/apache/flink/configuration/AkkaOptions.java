@@ -22,6 +22,7 @@ import org.apache.flink.annotation.PublicEvolving;
 
 /**
  * Akka configuration options.
+ *
  */
 @PublicEvolving
 public class AkkaOptions {
