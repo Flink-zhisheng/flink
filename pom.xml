@@ -697,13 +697,13 @@ under the License.
 								<skip>true</skip>
 							</configuration>
 						</plugin>
-						<plugin>
+						<!--<plugin>
 							<groupId>com.github.siom79.japicmp</groupId>
 							<artifactId>japicmp-maven-plugin</artifactId>
 							<configuration>
 								<skip>true</skip>
 							</configuration>
-						</plugin>
+						</plugin>-->
 					</plugins>
 				</pluginManagement>
 			</build>
@@ -1564,7 +1564,7 @@ under the License.
 				</plugin>
 
 				<!-- Configuration for the binary compatibility checker -->
-				<plugin>
+				<!--<plugin>
 					<groupId>com.github.siom79.japicmp</groupId>
 					<artifactId>japicmp-maven-plugin</artifactId>
 					<version>0.11.0</version>
@@ -1609,7 +1609,7 @@ under the License.
 							<includeSynthetic>true</includeSynthetic>
 							<ignoreMissingClasses>false</ignoreMissingClasses>
 							<skipPomModules>true</skipPomModules>
-							<!-- Don't break build on newly added maven modules -->
+							&lt;!&ndash; Don't break build on newly added maven modules &ndash;&gt;
 							<ignoreNonResolvableArtifacts>true</ignoreNonResolvableArtifacts>
 						</parameter>
 						<dependencies>
@@ -1628,7 +1628,7 @@ under the License.
 							</goals>
 						</execution>
 					</executions>
-				</plugin>
+				</plugin>-->
 
 			</plugins>
 		</pluginManagement>

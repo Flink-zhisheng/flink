@@ -241,17 +241,17 @@ under the License.
 			</plugin>
 
 			<!-- activate API compatibility checks -->
-			<plugin>
+			<!--<plugin>
 				<groupId>com.github.siom79.japicmp</groupId>
 				<artifactId>japicmp-maven-plugin</artifactId>
 				<configuration>
 					<parameter>
 						<excludes combine.children="append">
-							<!-- Exclude generated classes from api compatibility checks -->
+							&lt;!&ndash; Exclude generated classes from api compatibility checks &ndash;&gt;
 							<exclude>*\$\$anon\$*</exclude>
 
-							<!-- Ignore method which was created automatically by Scala for default value calculation.
-							Can be removed once https://github.com/siom79/japicmp/issues/176 will be fixed -->
+							&lt;!&ndash; Ignore method which was created automatically by Scala for default value calculation.
+							Can be removed once https://github.com/siom79/japicmp/issues/176 will be fixed &ndash;&gt;
 							<exclude>org.apache.flink.streaming.api.scala.DataStream#iterate\$default\$3()</exclude>
 						</excludes>
 					</parameter>
@@ -264,7 +264,7 @@ under the License.
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 
 			<!-- Generate the test-jar -->
 			<plugin>

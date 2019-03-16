@@ -87,7 +87,7 @@ under the License.
 		<plugins>
 
 			<!-- activate API compatibility checks -->
-			<plugin>
+			<!--<plugin>
 				<groupId>com.github.siom79.japicmp</groupId>
 				<artifactId>japicmp-maven-plugin</artifactId>
 				<configuration>
@@ -97,7 +97,7 @@ under the License.
 						</excludes>
 					</parameter>
 				</configuration>
-			</plugin>
+			</plugin>-->
 
 			<!-- disable fork reuse for the streaming project, because of
 			incorrect declaration of tests -->

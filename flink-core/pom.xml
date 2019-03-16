@@ -135,7 +135,7 @@ under the License.
 			</plugin>
 
 			<!-- activate API compatibility checks -->
-			<plugin>
+			<!--<plugin>
 				<groupId>com.github.siom79.japicmp</groupId>
 				<artifactId>japicmp-maven-plugin</artifactId>
 				<configuration>
@@ -148,8 +148,8 @@ under the License.
 							<exclude>org.apache.flink.core.fs.FileSystem#setDefaultScheme(org.apache.flink.configuration.Configuration)</exclude>
 							<exclude>org.apache.flink.api.java.typeutils.WritableTypeInfo</exclude>
 							<exclude>org.apache.flink.api.java.typeutils.AvroTypeInfo</exclude>
-							<!-- Breaking changes between 1.1 and 1.2.
-							We ignore these changes because these are low-level, internal runtime configuration parameters -->
+							&lt;!&ndash; Breaking changes between 1.1 and 1.2.
+							We ignore these changes because these are low-level, internal runtime configuration parameters &ndash;&gt;
 							<exclude>org.apache.flink.configuration.ConfigConstants</exclude>
 							<exclude>org.apache.flink.configuration.ConfigConstants#DEFAULT_NETWORK_REQUEST_BACKOFF_INITIAL</exclude>
 							<exclude>org.apache.flink.configuration.ConfigConstants#DEFAULT_NETWORK_REQUEST_BACKOFF_MAX</exclude>
@@ -158,7 +158,7 @@ under the License.
 							<exclude>org.apache.flink.configuration.ConfigConstants#NETWORK_REQUEST_BACKOFF_INITIAL_KEY</exclude>
 							<exclude>org.apache.flink.configuration.ConfigConstants#NETWORK_REQUEST_BACKOFF_MAX_KEY</exclude>
 
-							<!-- fields that were accidentally not final in the beginning -->
+							&lt;!&ndash; fields that were accidentally not final in the beginning &ndash;&gt;
 							<exclude>org.apache.flink.configuration.ConfigConstants.DEFAULT_AKKA_WATCH_THRESHOLD</exclude>
 							<exclude>org.apache.flink.configuration.ConfigConstants.DEFAULT_AKKA_DISPATCHER_THROUGHPUT</exclude>
 							<exclude>org.apache.flink.configuration.ConfigConstants.DEFAULT_SECURITY_SSL_VERIFY_HOSTNAME</exclude>
@@ -177,17 +177,17 @@ under the License.
 							<exclude>org.apache.flink.configuration.ConfigConstants.DEFAULT_AKKA_TRANSPORT_HEARTBEAT_PAUSE</exclude>
 							<exclude>org.apache.flink.configuration.ConfigConstants.DEFAULT_AKKA_SSL_ENABLED</exclude>
 
-							<!-- apparently there is a bug in the plugin which makes it fail on this new file, event though
-								its new, and not conflicting/breaking -->
+							&lt;!&ndash; apparently there is a bug in the plugin which makes it fail on this new file, event though
+								its new, and not conflicting/breaking &ndash;&gt;
 							<exclude>org.apache.flink.api.common.serialization.DeserializationSchema</exclude>
 							<exclude>org.apache.flink.api.common.serialization.SerializationSchema</exclude>
 
-							<!-- leaked constructor in TypeHint -->
+							&lt;!&ndash; leaked constructor in TypeHint &ndash;&gt;
 							<exclude>org.apache.flink.api.common.typeinfo.TypeHint</exclude>
 						</excludes>
 					</parameter>
 				</configuration>
-			</plugin>
+			</plugin>-->
 
 			<!-- publish some test base classes -->
 			<plugin>

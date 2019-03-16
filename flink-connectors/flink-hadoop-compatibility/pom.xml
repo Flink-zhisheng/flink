@@ -88,10 +88,10 @@ under the License.
 	<build>
 		<plugins>
 			<!-- activate API compatibility checks -->
-			<plugin>
+			<!--<plugin>
 				<groupId>com.github.siom79.japicmp</groupId>
 				<artifactId>japicmp-maven-plugin</artifactId>
-			</plugin>
+			</plugin>-->
 			<!-- Scala Compiler -->
 			<plugin>
 				<groupId>net.alchim31.maven</groupId>
