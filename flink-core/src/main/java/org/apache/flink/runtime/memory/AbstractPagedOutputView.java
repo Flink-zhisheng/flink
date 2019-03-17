@@ -31,6 +31,7 @@ import java.io.UTFDataFormatException;
  * encoding methods to write data to a page and detect page boundary crossing. The concrete sub classes must
  * implement the methods to collect the current page and provide the next memory page once the boundary is crossed.
  *
+ *
  * <p>The paging assumes that all memory segments are of the same size.
  */
 public abstract class AbstractPagedOutputView implements DataOutputView {

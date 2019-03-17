@@ -26,6 +26,7 @@ import java.io.OutputStream;
 
 /**
  * Utility class that turns an {@link OutputStream} into a {@link DataOutputView}.
+ *
  */
 @PublicEvolving
 public class DataOutputViewStreamWrapper extends DataOutputStream implements DataOutputView {

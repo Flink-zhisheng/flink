@@ -32,6 +32,7 @@ import static org.apache.flink.util.Preconditions.checkArgument;
 /**
  * This class represents a piece of memory managed by Flink.
  * The segment may be backed by heap memory (byte array) or by off-heap memory.
+ * segment 是由堆内存(字节数组)或堆外内存组成的
  *
  * <p>The methods for individual memory access are specialized in the classes
  * {@link org.apache.flink.core.memory.HeapMemorySegment} and

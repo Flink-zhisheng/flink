@@ -31,6 +31,7 @@ import java.util.Objects;
  * The segment is backed by a byte array and features random put and get methods for the basic types,
  * as well as compare and swap methods.
  *
+ *
  * <p>This class specializes byte access and byte copy calls for heap memory, while reusing the
  * multi-byte type accesses and cross-segment operations from the MemorySegment.
  *

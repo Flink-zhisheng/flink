@@ -25,6 +25,7 @@ import java.nio.ByteOrder;
 
 /**
  * Utility class for memory operations.
+ *
  */
 @Internal
 public class MemoryUtils {

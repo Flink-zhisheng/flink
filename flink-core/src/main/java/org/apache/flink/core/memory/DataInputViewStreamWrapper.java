@@ -27,6 +27,7 @@ import java.io.InputStream;
 
 /**
  * Utility class that turns an {@link InputStream} into a {@link DataInputView}.
+ *
  */
 @PublicEvolving
 public class DataInputViewStreamWrapper extends DataInputStream implements DataInputView {

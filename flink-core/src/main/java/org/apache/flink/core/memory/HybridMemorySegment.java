@@ -33,6 +33,7 @@ import java.nio.ReadOnlyBufferException;
  * This class represents a piece of memory managed by Flink. The memory can be on-heap or off-heap,
  * this is transparently handled by this class.
  *
+ *
  * <p>This class specializes byte access and byte copy calls for heap memory, while reusing the
  * multi-byte type accesses and cross-segment operations from the MemorySegment.
  *

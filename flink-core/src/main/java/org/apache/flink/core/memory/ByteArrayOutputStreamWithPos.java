@@ -28,6 +28,7 @@ import java.util.Arrays;
 
 /**
  * Un-synchronized stream similar to Java's ByteArrayOutputStream that also exposes the current position.
+ *
  */
 @Internal
 public class ByteArrayOutputStreamWithPos extends OutputStream implements MemorySegmentWritable {

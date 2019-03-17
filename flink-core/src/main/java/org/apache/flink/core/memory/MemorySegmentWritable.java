@@ -22,6 +22,7 @@ import java.io.IOException;
 
 /**
  * Provides the interface for write(Segment).
+ *
  */
 public interface MemorySegmentWritable {
 

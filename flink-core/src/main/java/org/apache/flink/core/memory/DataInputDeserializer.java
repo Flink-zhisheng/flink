@@ -26,6 +26,7 @@ import java.nio.ByteOrder;
 
 /**
  * A simple and efficient deserializer for the {@link java.io.DataInput} interface.
+ *
  */
 public class DataInputDeserializer implements DataInputView, java.io.Serializable {
 
