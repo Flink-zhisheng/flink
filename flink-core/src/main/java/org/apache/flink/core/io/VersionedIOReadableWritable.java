@@ -29,6 +29,7 @@ import java.util.Arrays;
  * This is the abstract base class for {@link IOReadableWritable} which allows to differentiate between serialization
  * versions. Concrete subclasses should typically override the {@link #write(DataOutputView)} and
  * {@link #read(DataInputView)}, thereby calling super to ensure version checking.
+ *
  */
 @Internal
 public abstract class VersionedIOReadableWritable implements IOReadableWritable, Versioned {

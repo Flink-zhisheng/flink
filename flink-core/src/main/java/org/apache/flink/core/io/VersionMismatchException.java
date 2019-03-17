@@ -24,6 +24,7 @@ import java.io.IOException;
 
 /**
  * This exception signals that incompatible versions have been found during serialization.
+ *
  */
 @PublicEvolving
 public class VersionMismatchException extends IOException {

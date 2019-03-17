@@ -26,6 +26,7 @@ import java.io.Serializable;
  * InputSplitSources create {@link InputSplit}s that define portions of data to be produced
  * by {@link org.apache.flink.api.common.io.InputFormat}s.
  *
+ *
  * @param <T> The type of the input splits created by the source.
  */
 @Public

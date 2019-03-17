@@ -25,6 +25,7 @@ import java.util.List;
 /**
  * An input split assigner distributes the {@link InputSplit}s among the instances on which a
  * data source exists.
+ *
  */
 @PublicEvolving
 public interface InputSplitAssigner {

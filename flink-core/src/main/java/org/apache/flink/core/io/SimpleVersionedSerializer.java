@@ -22,6 +22,7 @@ import java.io.IOException;
 
 /**
  * A simple serializer interface for versioned serialization.
+ *
  * 
  * <p>The serializer has a version (returned by {@link #getVersion()}) which can be attached
  * to the serialized data. When the serializer evolves, the version can be used to identify
