@@ -22,6 +22,7 @@ import java.io.IOException;
 
 /**
  * An exception to indicate that a specific file system scheme is not supported.
+ *
  */
 public class UnsupportedFileSystemSchemeException extends IOException {
 

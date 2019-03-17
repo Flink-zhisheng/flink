@@ -25,6 +25,7 @@ import java.io.IOException;
 
 /**
  * Implementation of the {@link BlockLocation} interface for a local file system.
+ *
  */
 @Internal
 public class LocalBlockLocation implements BlockLocation {

@@ -180,6 +180,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
  * <p>Internal runtime code can explicitly obtain a FileSystem that does not use the safety
  * net via {@link FileSystem#getUnguardedFileSystem(URI)}.
  *
+ *
  * @see FSDataInputStream
  * @see FSDataOutputStream
  */
@@ -238,6 +239,8 @@ public abstract class FileSystem {
 	// ------------------------------------------------------------------------
 
 	/**
+	 * 初始化共享文件系统设置
+	 *
 	 * Initializes the shared file system settings.
 	 *
 	 * <p>The given configuration is passed to each file system factory to initialize the respective

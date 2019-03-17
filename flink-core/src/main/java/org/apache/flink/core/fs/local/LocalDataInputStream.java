@@ -31,6 +31,7 @@ import java.nio.channels.FileChannel;
 /**
  * The <code>LocalDataInputStream</code> class is a wrapper class for a data
  * input stream to the local file system.
+ *
  */
 @Internal
 public class LocalDataInputStream extends FSDataInputStream {

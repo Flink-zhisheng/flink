@@ -46,6 +46,7 @@ import java.util.Map;
  * <p>Other than that, it works like a normal {@link CloseableRegistry}.
  *
  * <p>All methods in this class are thread-safe.
+ *
  */
 @Internal
 public class SafetyNetCloseableRegistry extends

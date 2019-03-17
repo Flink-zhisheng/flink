@@ -26,6 +26,7 @@ import java.io.IOException;
 
 /**
  * Simple forwarding wrapper around {@link FSDataInputStream}.
+ *
  */
 @Internal
 public class FSDataOutputStreamWrapper extends FSDataOutputStream implements WrappingProxy<FSDataOutputStream> {

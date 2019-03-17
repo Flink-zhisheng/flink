@@ -20,6 +20,7 @@ package org.apache.flink.core.fs;
 
 /**
  * LocatedFileStatus is able to get location of a file/block.
+ *
  */
 public interface LocatedFileStatus extends FileStatus {
 	BlockLocation[] getBlockLocation();

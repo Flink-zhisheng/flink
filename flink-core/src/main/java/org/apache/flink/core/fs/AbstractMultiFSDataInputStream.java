@@ -28,6 +28,7 @@ import java.io.IOException;
 /**
  * Abstract base class for wrappers over multiple {@link FSDataInputStream}, which gives a contiguous view on all inner
  * streams and makes them look like a single stream, in which we can read, seek, etc.
+ *
  */
 @Internal
 public abstract class AbstractMultiFSDataInputStream extends FSDataInputStream {

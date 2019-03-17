@@ -28,6 +28,7 @@ import java.io.IOException;
 /**
  * The <code>LocalDataOutputStream</code> class is a wrapper class for a data
  * output stream to the local file system.
+ *
  */
 @Internal
 public class LocalDataOutputStream extends FSDataOutputStream {

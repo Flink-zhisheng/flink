@@ -29,6 +29,7 @@ import java.net.URI;
  *
  * <p>The factory is typically configured via {@link #configure(Configuration)} before
  * creating file systems via {@link #create(URI)}.
+ *
  */
 @PublicEvolving
 public interface FileSystemFactory {

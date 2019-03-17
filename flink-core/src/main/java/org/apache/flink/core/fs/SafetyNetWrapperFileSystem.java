@@ -32,6 +32,7 @@ import java.net.URI;
  *
  * <p>Streams obtained by this are therefore managed by the {@link SafetyNetCloseableRegistry} to
  * prevent resource leaks from unclosed streams.
+ *
  */
 @Internal
 public class SafetyNetWrapperFileSystem extends FileSystem implements WrappingProxy<FileSystem> {

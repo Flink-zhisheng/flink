@@ -29,6 +29,7 @@ import java.io.InputStream;
  * <p>This extends the {@link java.io.InputStream} with methods for accessing
  * the stream's {@link #getPos() current position} and
  * {@link #seek(long) seeking} to a desired position.
+ *
  */
 @Public
 public abstract class FSDataInputStream extends InputStream {

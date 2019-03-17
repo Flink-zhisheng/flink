@@ -56,6 +56,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
 /**
  * The class {@code LocalFileSystem} is an implementation of the {@link FileSystem} interface
  * for the local file system of the machine where the JVM runs.
+ *
  */
 @Internal
 public class LocalFileSystem extends FileSystem {

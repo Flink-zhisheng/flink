@@ -33,6 +33,7 @@ import java.util.Map;
  * <p>Registering to an already closed registry will throw an exception and close the provided {@link Closeable}
  *
  * <p>All methods in this class are thread-safe.
+ *
  */
 @Internal
 public class CloseableRegistry extends AbstractCloseableRegistry<Closeable, Object> {

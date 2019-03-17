@@ -22,6 +22,7 @@ import org.apache.flink.annotation.PublicEvolving;
 
 /**
  * An enumeration defining the kind and characteristics of a {@link FileSystem}.
+ *
  */
 @PublicEvolving
 public enum FileSystemKind {

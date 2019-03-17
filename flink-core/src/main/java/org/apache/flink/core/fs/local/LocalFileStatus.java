@@ -28,6 +28,7 @@ import java.io.File;
 /**
  * The class <code>LocalFileStatus</code> provides an implementation of the {@link FileStatus} interface
  * for the local file system.
+ *
  */
 @Internal
 public class LocalFileStatus implements FileStatus {

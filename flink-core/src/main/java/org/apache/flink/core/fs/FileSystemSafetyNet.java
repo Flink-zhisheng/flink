@@ -31,6 +31,7 @@ import static org.apache.flink.util.Preconditions.checkState;
  * obtains. The safety net has a global cleanup hook that will close all streams that were
  * not properly closed.
  *
+ *
  * <p>The main thread of each Flink task, as well as the checkpointing thread are automatically guarded
  * by this safety net.
  *

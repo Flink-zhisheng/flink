@@ -24,6 +24,7 @@ import java.io.IOException;
 
 /**
  * A BlockLocation lists hosts, offset and length of block.
+ * BlockLocation 含主机、偏移量和block的长度。
  */
 @Public
 public interface BlockLocation extends Comparable<BlockLocation> {

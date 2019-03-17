@@ -29,6 +29,7 @@ import java.io.OutputStream;
  *
  * <h2>Data Persistence Guarantees</h2>
  *
+ *
  * <p>These streams are used to persistently store data, both for results of streaming applications
  * and for fault tolerance and recovery. It is therefore crucial that the persistence semantics
  * of these streams are well defined.
