@@ -20,6 +20,7 @@ package org.apache.flink.api.common;
 
 /**
  * Type of the job.
+ * 有界流/无界流
  */
 public enum JobType {
 

@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ *
  * Utility class for dealing with user-defined Throwable types that are serialized (for
  * example during RPC/Actor communication), but cannot be resolved with the default
  * class loader.

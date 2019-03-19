@@ -59,6 +59,7 @@ import static org.apache.flink.util.Preconditions.checkArgument;
  *         the "static code analyzer". The static code analyzer pre-interprets user-defined functions in order to
  *         get implementation insights for program improvements that can be printed to the log or
  *         automatically applied.</li>
+ *
  * </ul>
  */
 @Public

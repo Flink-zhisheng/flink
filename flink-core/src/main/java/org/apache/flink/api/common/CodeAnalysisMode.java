@@ -22,8 +22,8 @@ import org.apache.flink.annotation.PublicEvolving;
 
 /**
  * Specifies to which extent user-defined functions are analyzed in order
- * to give the Flink optimizer an insight of UDF internals and inform
- * the user about common implementation mistakes.
+ * to give the Flink optimizer an insight of UDF internals and inform the user about common implementation mistakes.
+ *
  *
  * The analyzer gives hints about:
  *  - ForwardedFields semantic properties

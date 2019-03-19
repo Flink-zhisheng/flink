@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 /**
  * The result of a job execution. Gives access to the execution time of the job,
  * and to all accumulators created by this job.
+ *
  */
 @Public
 public class JobExecutionResult extends JobSubmissionResult {

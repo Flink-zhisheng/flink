@@ -22,6 +22,7 @@ import org.apache.flink.annotation.Public;
 
 /**
  * The result of submitting a job to a JobManager.
+ *
  */
 @Public
 public class JobSubmissionResult {

@@ -24,6 +24,7 @@ import org.apache.flink.annotation.Public;
 /**
  * An special case of the {@link InvalidProgramException}, indicating that a part of the program
  * that needs to be serializable (for shipping) is not serializable.
+ *
  */
 @Public
 public class NonSerializableUserCodeException extends InvalidProgramException {

@@ -26,6 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Accumulator registry encapsulates user-defined accumulators.
+ *
  */
 public abstract class AbstractAccumulatorRegistry {
 	/* User-defined accumulator values stored for the executing task. */
@@ -40,7 +41,6 @@ public abstract class AbstractAccumulatorRegistry {
 			throw new UnsupportedOperationException("The accumulator '" + name
 				+ "' already exists and cannot be added.");
 		}
-
 		userAccumulators.put(name, accumulator);
 	}
 
