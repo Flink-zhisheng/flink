@@ -25,6 +25,7 @@ import org.apache.flink.runtime.jobgraph.OperatorDescriptor;
 import java.util.List;
 
 /**
+ *
  * Common interface for the runtime {@link ExecutionJobVertex} and {@link ArchivedExecutionJobVertex}.
  */
 public interface AccessExecutionJobVertex {

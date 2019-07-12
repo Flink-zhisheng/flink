@@ -161,6 +161,7 @@ public class StreamingJobGraphGenerator {
 	private JobGraph createJobGraph() {
 
 		// add custom configuration to the job graph
+		//向 jobGraph 添加 streamGraph 中的配置
 		jobGraph.addCustomConfiguration(streamGraph.getCustomConfiguration());
 
 		// Generate deterministic hashes for the nodes in order to identify them across
@@ -201,6 +202,7 @@ public class StreamingJobGraphGenerator {
 	}
 
 	/**
+	 * 为作业调度设置参数。调度程序可以利用这些参数来调度任务
 	 * Set parameters for job scheduling. Schedulers may leverage these parameters to schedule tasks.
 	 */
 	private void setSchedulerConfiguration() {

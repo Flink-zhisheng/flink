@@ -21,7 +21,9 @@ package org.apache.flink.runtime.taskexecutor.exceptions;
 import org.apache.flink.runtime.taskexecutor.TaskExecutor;
 
 /**
- * Exception which indicates that the {@link TaskExecutor} could not register at
+ * TaskExecutor 无法及时在主服务器上注册
+ *
+ * Exception which indicates that the {@link TaskExecutor} could not register at the master in time
  * the master in time.
  */
 public class RegistrationTimeoutException extends TaskManagerException {

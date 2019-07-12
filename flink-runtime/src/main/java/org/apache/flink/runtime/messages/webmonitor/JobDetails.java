@@ -40,6 +40,8 @@ import java.util.Arrays;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ * Job 详情
+ *
  * An actor message with a detailed overview of the current status of a job.
  */
 @JsonSerialize(using = JobDetails.JobDetailsSerializer.class)
@@ -57,22 +59,49 @@ public class JobDetails implements Serializable {
 	private static final String FIELD_NAME_LAST_MODIFICATION = "last-modification";
 	private static final String FIELD_NAME_TOTAL_NUMBER_TASKS = "total";
 
+	/**
+	 * job id
+	 */
 	private final JobID jobId;
 
+	/**
+	 * job name
+	 */
 	private final String jobName;
 
+	/**
+	 * job 开始时间
+	 */
 	private final long startTime;
 
+	/**
+	 * job 结束时间
+	 */
 	private final long endTime;
 
+	/**
+	 * job 运行的时间
+	 */
 	private final long duration;
 
+	/**
+	 * job 的状态
+	 */
 	private final JobStatus status;
 
+	/**
+	 * job 上次更新的时间
+	 */
 	private final long lastUpdateTime;
 
+	/**
+	 * job 中所有 task 的状态
+	 */
 	private final int[] tasksPerState;
-	
+
+	/**
+	 * job task 的数量
+	 */
 	private final int numTasks;
 
 	public JobDetails(

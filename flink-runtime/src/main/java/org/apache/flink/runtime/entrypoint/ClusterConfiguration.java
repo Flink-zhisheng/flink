@@ -21,6 +21,7 @@ package org.apache.flink.runtime.entrypoint;
 import org.apache.flink.util.Preconditions;
 
 /**
+ * 集群配置（配置文件的目录 / webui-port）
  * Configuration class which contains the parsed command line arguments for
  * the {@link ClusterEntrypoint}.
  */

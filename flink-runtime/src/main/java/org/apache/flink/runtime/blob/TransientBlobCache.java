@@ -40,6 +40,8 @@ import static org.apache.flink.runtime.blob.BlobKey.BlobType.TRANSIENT_BLOB;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ *
+ *
  * Provides access to transient BLOB files stored at the {@link BlobServer}.
  *
  * <p>TODO: make this truly transient by returning file streams to a local copy with the remote

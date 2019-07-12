@@ -21,6 +21,7 @@ package org.apache.flink.runtime.security;
 import java.util.concurrent.Callable;
 
 /**
+ *
  * A security context with may be required to run a Callable.
  */
 public interface SecurityContext {

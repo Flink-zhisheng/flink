@@ -87,17 +87,24 @@ public class LocalStreamEnvironment extends StreamExecutionEnvironment {
 	@Override
 	protected JobSubmissionResult executeInternal(String jobName, boolean detached, SavepointRestoreSettings savepointRestoreSettings) throws Exception {
 		// transform the streaming program into a JobGraph
+		//将流程序转换成 StreamGraph
 		StreamGraph streamGraph = getStreamGraph();
+//		System.out.println("==========streamGraph= " + GsonUtil.toJson(streamGraph));
+
 		streamGraph.setJobName(jobName);
 		// transform the streaming program into a JobGraph
+		//将 StreamGraph 转换成 JobGraph
 		JobGraph jobGraph = streamGraph.getJobGraph();
 		jobGraph.setAllowQueuedScheduling(true);
+		//创建 MiniCluster 并启动
 		MiniCluster miniCluster = prepareMiniCluster(jobGraph);
 
 		try {
+			//运行 job
 			return miniCluster.executeJob(jobGraph, detached);
 		}
 		finally {
+			//关闭资源
 			transformations.clear();
 			if (!detached) {
 				miniCluster.close();
@@ -135,14 +142,17 @@ public class LocalStreamEnvironment extends StreamExecutionEnvironment {
 	}
 
 	private MiniCluster prepareMiniCluster(JobGraph jobGraph) throws Exception {
+		//准备配置
 		Configuration configuration = new Configuration();
 		configuration.addAll(jobGraph.getJobConfiguration());
 		// Set the resource of miniCluster to infinite.
+		//将 miniCluster 的资源设置为 无限
 		configuration.setInteger(TaskManagerOptions.TASK_MANAGER_HEAP_MEMORY, Integer.MAX_VALUE / 4);
 		configuration.setDouble(TaskManagerOptions.TASK_MANAGER_CORE, Integer.MAX_VALUE / 4);
 		configuration.setLong(TaskManagerOptions.MANAGED_MEMORY_SIZE, (Integer.MAX_VALUE / 4) >> 10);
 
 		// add (and override) the settings with what the user defined
+		//引入用户自定义的配置（可能会覆盖上面的配置）
 		configuration.addAll(this.configuration);
 
 		if (!configuration.contains(RestOptions.PORT)) {
@@ -151,6 +161,7 @@ public class LocalStreamEnvironment extends StreamExecutionEnvironment {
 
 		int numSlotsPerTaskManager = configuration.getInteger(TaskManagerOptions.NUM_TASK_SLOTS, jobGraph.getMaximumParallelism() * jobGraph.getNumberOfVertices());
 
+		//构建 MiniClusterConfiguration 对象
 		MiniClusterConfiguration cfg = new MiniClusterConfiguration.Builder()
 				.setConfiguration(configuration)
 				.setNumSlotsPerTaskManager(numSlotsPerTaskManager)
@@ -159,8 +170,9 @@ public class LocalStreamEnvironment extends StreamExecutionEnvironment {
 		if (LOG.isInfoEnabled()) {
 			LOG.info("Running job on local embedded Flink mini cluster");
 		}
-
+		//构建 MiniCluster
 		MiniCluster miniCluster = new MiniCluster(cfg);
+		//启动 MiniCluster
 		miniCluster.start();
 
 		configuration.setInteger(RestOptions.PORT, miniCluster.getRestAddress().getPort());

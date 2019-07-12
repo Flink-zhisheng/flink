@@ -30,6 +30,7 @@ import static org.apache.flink.runtime.metrics.groups.TaskMetricGroup.METRICS_OP
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ *
  * The Operator descriptor.
  */
 public class OperatorDescriptor implements Serializable {

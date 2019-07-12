@@ -1943,9 +1943,10 @@ public abstract class StreamExecutionEnvironment {
 			throw new IllegalStateException("No operators defined in streaming topology. Cannot execute.");
 		}
 
-		if (JobType.STREAMING.equals(jobType)) {
+		if (JobType.STREAMING.equals(jobType)) {//流程序
+			//通过给定的 StreamTransformation 遍历生成 StreamGraph
 			return StreamGraphGenerator.generate(StreamGraphGenerator.Context.buildStreamProperties(this), transformations);
-		} else if (JobType.BATCH.equals(jobType)) {
+		} else if (JobType.BATCH.equals(jobType)) {//批程序
 			return StreamGraphGenerator.generate(StreamGraphGenerator.Context.buildBatchProperties(this), transformations);
 		} else {
 			throw new UnsupportedOperationException("Not support the " + jobType + " job type");
@@ -1978,6 +1979,8 @@ public abstract class StreamExecutionEnvironment {
 	}
 
 	/**
+	 * 当执行 env.execute() 方法时则会调用这个方法，将运算符添加到应执行的运算符列表中
+	 *
 	 * Adds an operator to the list of operators that should be executed when calling
 	 * {@link #execute}.
 	 *
@@ -2254,6 +2257,7 @@ public abstract class StreamExecutionEnvironment {
 
 	/**
 	 * Defines the type of a job.
+	 * job 的类型 批 or 流
 	 */
 	@Internal
 	public enum JobType {

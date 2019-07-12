@@ -21,6 +21,8 @@ package org.apache.flink.runtime.taskexecutor.exceptions;
 import org.apache.flink.runtime.taskexecutor.TaskExecutor;
 
 /**
+ * TaskExecutor 端结果分区出现问题
+ *
  * Exception indicating a problem with the result partitions on the {@link TaskExecutor} side.
  */
 public class PartitionException extends TaskManagerException {

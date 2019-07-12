@@ -19,6 +19,8 @@
 package org.apache.flink.metrics.reporter;
 
 /**
+ * 用于主动定期发送数据的接口
+ *
  * Interface for reporters that actively send out data periodically.
  */
 public interface Scheduled {

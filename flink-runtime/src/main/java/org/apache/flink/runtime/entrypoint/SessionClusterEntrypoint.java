@@ -54,6 +54,8 @@ import java.io.IOException;
 import java.util.concurrent.Executor;
 
 /**
+ * 会话集群启动入口点的基础类
+ *
  * Base class for session cluster entry points.
  */
 public abstract class SessionClusterEntrypoint extends ClusterEntrypoint {
@@ -106,36 +108,18 @@ public abstract class SessionClusterEntrypoint extends ClusterEntrypoint {
 
 	@Override
 	protected Dispatcher createDispatcher(
-			Configuration configuration,
-			RpcService rpcService,
-			HighAvailabilityServices highAvailabilityServices,
-			ResourceManagerGateway resourceManagerGateway,
-			BlobServer blobServer,
-			HeartbeatServices heartbeatServices,
-			JobManagerMetricGroup jobManagerMetricGroup,
-			@Nullable String metricQueryServicePath,
-			ArchivedExecutionGraphStore archivedExecutionGraphStore,
-			FatalErrorHandler fatalErrorHandler,
-			@Nullable String restAddress,
-			HistoryServerArchivist historyServerArchivist,
+			Configuration configuration, RpcService rpcService, HighAvailabilityServices highAvailabilityServices,
+			ResourceManagerGateway resourceManagerGateway, BlobServer blobServer, HeartbeatServices heartbeatServices,
+			JobManagerMetricGroup jobManagerMetricGroup, @Nullable String metricQueryServicePath,
+			ArchivedExecutionGraphStore archivedExecutionGraphStore, FatalErrorHandler fatalErrorHandler,
+			@Nullable String restAddress, HistoryServerArchivist historyServerArchivist,
 			LeaderShipLostHandler leaderShipLostHandler) throws Exception {
 
 		// create the default dispatcher
 		return new StandaloneDispatcher(
-			rpcService,
-			Dispatcher.DISPATCHER_NAME,
-			configuration,
-			highAvailabilityServices,
-			resourceManagerGateway,
-			blobServer,
-			heartbeatServices,
-			jobManagerMetricGroup,
-			metricQueryServicePath,
-			archivedExecutionGraphStore,
-			Dispatcher.DefaultJobManagerRunnerFactory.INSTANCE,
-			fatalErrorHandler,
-			restAddress,
-			historyServerArchivist,
-			leaderShipLostHandler);
+			rpcService, Dispatcher.DISPATCHER_NAME, configuration, highAvailabilityServices,
+			resourceManagerGateway, blobServer, heartbeatServices, jobManagerMetricGroup,
+			metricQueryServicePath, archivedExecutionGraphStore, Dispatcher.DefaultJobManagerRunnerFactory.INSTANCE,
+			fatalErrorHandler, restAddress, historyServerArchivist, leaderShipLostHandler);
 	}
 }

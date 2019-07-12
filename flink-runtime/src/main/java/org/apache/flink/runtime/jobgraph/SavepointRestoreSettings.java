@@ -24,6 +24,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
  * Savepoint restore settings.
+ * Savepoint 的配置
  */
 public class SavepointRestoreSettings implements Serializable {
 

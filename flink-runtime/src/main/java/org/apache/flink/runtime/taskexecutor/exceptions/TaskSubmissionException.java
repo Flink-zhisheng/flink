@@ -21,6 +21,8 @@ package org.apache.flink.runtime.taskexecutor.exceptions;
 import org.apache.flink.runtime.taskmanager.Task;
 
 /**
+ * 任务提交异常类
+ *
  * Exception indicating a problem with the {@link Task} submission at the {@link TaskException}.
  */
 public class TaskSubmissionException extends TaskManagerException {

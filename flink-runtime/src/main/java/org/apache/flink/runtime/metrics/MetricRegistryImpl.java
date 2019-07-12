@@ -60,6 +60,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * MetricGroup 和 MetricReporter 之间的连接器
+ *
  * A MetricRegistry keeps track of all registered {@link Metric Metrics}. It serves as the
  * connection between {@link MetricGroup MetricGroups} and {@link MetricReporter MetricReporters}.
  */
@@ -404,6 +406,8 @@ public class MetricRegistryImpl implements MetricRegistry {
 	// ------------------------------------------------------------------------
 
 	/**
+	 * 定时任务将 metric report
+	 *
 	 * This task is explicitly a static class, so that it does not hold any references to the enclosing
 	 * MetricsRegistry instance.
 	 *

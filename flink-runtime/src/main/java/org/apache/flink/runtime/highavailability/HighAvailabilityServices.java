@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
+ *
+ *
  * The HighAvailabilityServices give access to all services needed for a highly-available
  * setup. In particular, the services provide access to highly available storage and
  * registries, as well as distributed counters and leader election.

@@ -199,8 +199,10 @@ public class JobGraphGenerator implements Visitor<PlanNode> {
 		// finalize the iterations
 		for (IterationDescriptor iteration : this.iterations.values()) {
 			if (iteration.getIterationNode() instanceof BulkIterationPlanNode) {
+
 				finalizeBulkIteration(iteration);
 			} else if (iteration.getIterationNode() instanceof WorksetIterationPlanNode) {
+
 				finalizeWorksetIteration(iteration);
 			} else {
 				throw new CompilerException();

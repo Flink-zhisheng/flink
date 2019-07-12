@@ -36,6 +36,8 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
  * It describes the host where the TaskManager operates and its server port
  * for data exchange. This class also contains utilities to work with the
  * TaskManager's host name, which is used to localize work assignments.
+ *
+ *
  */
 public class TaskManagerLocation implements Comparable<TaskManagerLocation>, java.io.Serializable {
 

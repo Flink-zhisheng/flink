@@ -57,6 +57,7 @@ public class SignalHandler {
 	}
 
 	/**
+	 *
 	 * Register some signal handlers.
 	 *
 	 * @param LOG The slf4j logger

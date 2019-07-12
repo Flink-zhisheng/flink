@@ -21,6 +21,8 @@ package org.apache.flink.runtime.taskexecutor.exceptions;
 import org.apache.flink.runtime.taskexecutor.TaskExecutor;
 
 /**
+ * TaskExecutor 中任务异常类
+ *
  * Exception indicating a task related problem on the {@link TaskExecutor}.
  */
 public class TaskException extends TaskManagerException {

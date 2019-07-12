@@ -29,6 +29,8 @@ import org.apache.flink.runtime.leaderretrieval.StandaloneLeaderRetrievalService
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ * standalone HA 服务
+ *
  * An implementation of the {@link HighAvailabilityServices} for the non-high-availability case.
  * This implementation can be used for testing, and for cluster setups that do not
  * tolerate failures of the master processes (JobManager, ResourceManager).

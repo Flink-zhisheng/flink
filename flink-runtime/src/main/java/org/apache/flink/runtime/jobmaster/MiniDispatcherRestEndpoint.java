@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.util.concurrent.Executor;
 
 /**
+ *
  * REST endpoint for the {@link JobClusterEntrypoint}.
  */
 public class MiniDispatcherRestEndpoint extends WebMonitorEndpoint<RestfulGateway> {

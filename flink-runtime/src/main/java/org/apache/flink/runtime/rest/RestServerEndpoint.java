@@ -66,6 +66,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
+ *
  * An abstract class for netty-based REST server endpoints.
  */
 public abstract class RestServerEndpoint implements AutoCloseableAsync {

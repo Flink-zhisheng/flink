@@ -129,6 +129,8 @@ public class ZooKeeperUtils {
 	}
 
 	/**
+	 * 判断是否 HighAvailabilityMode ZOOKEEPER 配置了？
+	 *
 	 * Returns whether {@link HighAvailabilityMode#ZOOKEEPER} is configured.
 	 */
 	public static boolean isZooKeeperRecoveryMode(Configuration flinkConf) {

@@ -26,6 +26,8 @@ import javax.annotation.Nonnull;
 import java.util.UUID;
 
 /**
+ *
+ *
  * Standalone implementation of the {@link LeaderElectionService} interface. The standalone
  * implementation assumes that there is only a single {@link LeaderContender} and thus directly
  * grants him the leadership upon start up. Furthermore, there is no communication needed between

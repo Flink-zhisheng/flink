@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 /**
+ *
  * Interface for a {@link ArchivedExecutionGraph} store.
  */
 public interface ArchivedExecutionGraphStore extends Closeable {

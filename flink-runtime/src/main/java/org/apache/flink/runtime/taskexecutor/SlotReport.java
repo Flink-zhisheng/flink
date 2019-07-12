@@ -26,9 +26,9 @@ import java.util.Iterator;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
- * A report about the current status of all slots of the TaskExecutor, describing
- * which slots are available and allocated, and what jobs (JobManagers) the allocated slots
- * have been allocated to.
+ * A report about the current status of all slots of the TaskExecutor, describing which slots are available and allocated,
+ * and what jobs (JobManagers) the allocated slots have been allocated to.
+ * TaskExecutor 中所有 slot 的最近状态，描述哪些 slot 是可用的并且可分配的，已经分配的 slot 分配给了哪些作业
  */
 public class SlotReport implements Serializable, Iterable<SlotStatus> {
 

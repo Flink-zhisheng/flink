@@ -22,6 +22,7 @@ import org.apache.flink.configuration.Configuration;
 
 /**
  * Interface to access {@link TaskManager} information.
+ *
  */
 public interface TaskManagerRuntimeInfo {
 

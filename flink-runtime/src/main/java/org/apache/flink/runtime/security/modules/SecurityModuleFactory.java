@@ -21,6 +21,7 @@ package org.apache.flink.runtime.security.modules;
 import org.apache.flink.runtime.security.SecurityConfiguration;
 
 /**
+ *
  * A factory for a {@link SecurityModule}. A factory can determine whether a {@link SecurityModule}
  * works in the given environment (for example, it can check whether Hadoop dependencies are
  * available) and can then create (or not) a module based on that.

@@ -95,7 +95,9 @@ public class StatsDReporterTest extends TestLogger {
 		TaskManagerMetricGroup tmMetricGroup = new TaskManagerMetricGroup(metricRegistry, hostname, taskManagerId);
 		TaskManagerJobMetricGroup tmJobMetricGroup = new TaskManagerJobMetricGroup(metricRegistry, tmMetricGroup, new JobID(), jobName);
 		TaskMetricGroup taskMetricGroup = new TaskMetricGroup(metricRegistry, tmJobMetricGroup, new JobVertexID(), new AbstractID(), taskName, 0, 0);
-
+		System.out.println(tmMetricGroup);
+		System.out.println(tmJobMetricGroup);
+		System.out.println(taskMetricGroup);
 		SimpleCounter myCounter = new SimpleCounter();
 
 		taskMetricGroup.counter(counterName, myCounter);

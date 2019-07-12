@@ -23,6 +23,8 @@ import org.apache.flink.runtime.clusterframework.types.AllocationID;
 import org.apache.flink.util.Preconditions;
 
 /**
+ * slot 被给定的 AllocationID 占用异常
+ *
  * Exception which signals that a slot is already occupied by the given
  * {@link AllocationID}.
  */

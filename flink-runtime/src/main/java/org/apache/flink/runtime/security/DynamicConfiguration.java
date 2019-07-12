@@ -33,6 +33,7 @@ import java.util.Map;
 /**
  * A dynamic JAAS configuration.
  *
+ *
  * <p>Makes it possible to define Application Configuration Entries (ACEs) at runtime, building upon
  * an (optional) underlying configuration.   Entries from the underlying configuration take
  * precedence over dynamic entries.

@@ -27,6 +27,7 @@ import java.util.List;
 
 import static org.apache.flink.runtime.executiongraph.ExecutionJobVertex.getAggregateJobVertexState;
 
+
 public class ArchivedExecutionJobVertex implements AccessExecutionJobVertex, Serializable {
 
 	private static final long serialVersionUID = -5768187638639437957L;

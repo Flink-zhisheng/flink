@@ -23,6 +23,8 @@ import org.apache.flink.runtime.clusterframework.types.ResourceID;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ *
+ *
  * Interface for the interaction with the {@link HeartbeatManager}. The heartbeat listener is used
  * for the following things:
  *

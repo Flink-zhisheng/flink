@@ -42,6 +42,7 @@ import scala.concurrent.duration.Duration;
 
 /**
  * Configuration object for {@link TaskExecutor}.
+ * TaskExecutor 的配置
  */
 public class TaskManagerConfiguration implements TaskManagerRuntimeInfo {
 

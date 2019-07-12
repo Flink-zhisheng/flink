@@ -20,6 +20,9 @@ package org.apache.flink.runtime.rpc;
 
 /**
  * Handler for a component lost its leader ship.
+ *
+ * 组件与 leader 丢失联系的处理器
+ *
  */
 public interface LeaderShipLostHandler {
 

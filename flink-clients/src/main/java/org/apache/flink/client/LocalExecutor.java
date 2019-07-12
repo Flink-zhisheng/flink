@@ -113,10 +113,10 @@ public class LocalExecutor extends PlanExecutor {
 	public void start() throws Exception {
 		synchronized (lock) {
 			if (jobExecutorService == null) {
-				// create the embedded runtime
+				// 创建配置
 				jobExecutorServiceConfiguration = createConfiguration();
 
-				// start it up
+				// 创建作业执行器服务
 				jobExecutorService = createJobExecutorService(jobExecutorServiceConfiguration);
 			} else {
 				throw new IllegalStateException("The local executor was already started.");
@@ -131,7 +131,7 @@ public class LocalExecutor extends PlanExecutor {
 			if (!configuration.contains(RestOptions.PORT)) {
 				configuration.setInteger(RestOptions.PORT, 0);
 			}
-
+			//构建 MiniCluster 配置
 			final MiniClusterConfiguration miniClusterConfiguration = new MiniClusterConfiguration.Builder()
 				.setConfiguration(configuration)
 				.setNumTaskManagers(
@@ -143,12 +143,13 @@ public class LocalExecutor extends PlanExecutor {
 					configuration.getInteger(
 						TaskManagerOptions.NUM_TASK_SLOTS, 1))
 				.build();
-
+			//创建 MiniCluster 对象
 			final MiniCluster miniCluster = new MiniCluster(miniClusterConfiguration);
+			//启动 MiniCluster
 			miniCluster.start();
 
 			configuration.setInteger(RestOptions.PORT, miniCluster.getRestAddress().getPort());
-
+			// miniCluster 赋值给 newJobExecutorService
 			newJobExecutorService = miniCluster;
 		} else {
 			final LocalFlinkMiniCluster localFlinkMiniCluster = new LocalFlinkMiniCluster(configuration, true);
@@ -204,7 +205,7 @@ public class LocalExecutor extends PlanExecutor {
 			if (jobExecutorService == null) {
 				shutDownAtEnd = true;
 
-				// configure the number of local slots equal to the parallelism of the local plan
+				//  配置与本地 plan 并行度相等的本地 slot 数量
 				if (this.taskManagerNumSlots == DEFAULT_TASK_MANAGER_NUM_SLOTS) {
 					int maxParallelism = plan.getMaximumParallelism();
 					if (maxParallelism > 0) {
@@ -212,7 +213,7 @@ public class LocalExecutor extends PlanExecutor {
 					}
 				}
 
-				// start the cluster for us
+				// 启动集群
 				start();
 			}
 			else {

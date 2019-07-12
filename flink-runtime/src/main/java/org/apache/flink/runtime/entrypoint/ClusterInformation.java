@@ -24,6 +24,7 @@ import java.io.Serializable;
 
 /**
  * Information about the cluster which is shared with the cluster components.
+ *
  */
 public class ClusterInformation implements Serializable {
 

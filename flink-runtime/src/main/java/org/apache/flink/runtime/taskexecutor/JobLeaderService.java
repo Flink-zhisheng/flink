@@ -53,6 +53,7 @@ import java.util.concurrent.Executor;
  * successfully establishing a connection, the job leader listener is notified about the new job
  * leader and its connection. In case that a job leader loses leadership, the job leader listener
  * is notified as well.
+ *
  */
 public class JobLeaderService {
 

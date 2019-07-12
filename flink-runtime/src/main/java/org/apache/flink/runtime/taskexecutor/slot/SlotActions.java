@@ -24,11 +24,13 @@ import java.util.UUID;
 
 /**
  * Interface to trigger slot actions from within the {@link TaskSlotTable}.
+ * 从 TaskSlotTable 内触发 slot 操作的接口
  */
 public interface SlotActions {
 
 	/**
 	 * Free the task slot with the given allocation id.
+	 * 根据给定的 allocation id 释放任务 slot
 	 *
 	 * @param allocationId to identify the slot to be freed
 	 */

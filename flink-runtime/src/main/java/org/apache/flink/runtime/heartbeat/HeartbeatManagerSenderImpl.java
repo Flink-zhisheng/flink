@@ -32,6 +32,7 @@ import java.util.concurrent.TimeUnit;
  * {@link HeartbeatManager} implementation which regularly requests a heartbeat response from
  * its monitored {@link HeartbeatTarget}. The heartbeat period is configurable.
  *
+ *
  * @param <I> Type of the incoming heartbeat payload
  * @param <O> Type of the outgoing heartbeat payload
  */

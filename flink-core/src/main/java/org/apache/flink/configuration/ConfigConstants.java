@@ -67,6 +67,8 @@ public final class ConfigConstants {
 
 	/**
 	 * Maximum number of attempts the fixed delay restart strategy will try before failing a job.
+	 *
+	 * 重启尝试的次数
 	 */
 	@PublicEvolving
 	public static final String RESTART_STRATEGY_FIXED_DELAY_ATTEMPTS = "restart-strategy.fixed-delay.attempts";
@@ -74,6 +76,8 @@ public final class ConfigConstants {
 	/**
 	 * Delay between two consecutive restart attempts in FixedDelayRestartStrategy. It can be specified using Scala's
 	 * FiniteDuration notation: "1 min", "20 s"
+	 *
+	 * 两次重启之间的时间间隔
 	 */
 	@PublicEvolving
 	public static final ConfigOption<String> RESTART_STRATEGY_FIXED_DELAY_DELAY =

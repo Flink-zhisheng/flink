@@ -24,6 +24,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Closeable interface which allows to close a resource in a non
  * blocking fashion.
+ *
  */
 public interface AutoCloseableAsync extends AutoCloseable {
 

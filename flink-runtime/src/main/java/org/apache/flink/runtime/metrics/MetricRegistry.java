@@ -26,6 +26,8 @@ import org.apache.flink.runtime.metrics.scope.ScopeFormats;
 import javax.annotation.Nullable;
 
 /**
+ * metric
+ *
  * Interface for a metric registry.
  */
 public interface MetricRegistry {

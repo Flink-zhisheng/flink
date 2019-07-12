@@ -143,6 +143,7 @@ public class StreamGraphGenerator {
 	}
 
 	/**
+	 * 通过遍历给定的 StreamTransformation 来生成 StreamGraph
 	 * Generates a {@code StreamGraph} by traversing the graph of {@code StreamTransformations}
 	 * starting from the given transformations.
 	 *
@@ -158,13 +159,15 @@ public class StreamGraphGenerator {
 
 	/**
 	 * This starts the actual transformation, beginning from the sinks.
+	 * //todo：讲解如何转换成 StreamGraph
 	 */
 	private StreamGraph generateInternal(List<StreamTransformation<?>> transformations) {
+		//循环遍历 transformations
 		for (StreamTransformation<?> transformation: transformations) {
 			transform(transformation);
 		}
 
-		// set default resources for operators
+		// 为算子设置默认的资源
 		boolean needToSetDefaultResources = false;
 		if (context.getDefaultResources() == null || ResourceSpec.DEFAULT.equals(context.getDefaultResources())) {
 			for (StreamNode node : streamGraph.getStreamNodes()) {
@@ -794,7 +797,6 @@ public class StreamGraphGenerator {
 			context.setDefaultParallelism(env.getParallelism());
 			context.setMultiHeadChainMode(env.isMultiHeadChainMode());
 			context.setSlotSharingEnabled(env.isSlotSharingEnabled());
-
 			// For infinite stream job, by default schedule tasks in eager mode
 			context.setScheduleMode(ScheduleMode.EAGER);
 

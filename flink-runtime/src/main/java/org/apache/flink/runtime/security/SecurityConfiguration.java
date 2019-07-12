@@ -36,6 +36,8 @@ import java.util.List;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ * security 配置
+ *
  * The global security configuration.
  *
  * <p>See {@link SecurityOptions} for corresponding configuration options.
@@ -66,7 +68,7 @@ public class SecurityConfiguration {
 	/**
 	 * Create a security configuration from the global configuration.
 	 * @param flinkConf the Flink global configuration.
-*/
+	*/
 	public SecurityConfiguration(Configuration flinkConf) {
 		this(flinkConf, DEFAULT_MODULES);
 	}

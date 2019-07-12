@@ -21,6 +21,7 @@ package org.apache.flink.runtime.security.modules;
 import org.apache.flink.runtime.security.SecurityConfiguration;
 
 /**
+ *
  * A {@link SecurityModuleFactory} for {@link JaasModule}.
  */
 public class JaasModuleFactory implements SecurityModuleFactory {

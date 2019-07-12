@@ -35,6 +35,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
+ *
  * Heartbeat manager implementation. The heartbeat manager maintains a map of heartbeat monitors
  * and resource IDs. Each monitor will be updated when a new heartbeat of the associated machine has
  * been received. If the monitor detects that a heartbeat has timed out, it will notify the

@@ -78,6 +78,8 @@ public abstract class RestartStrategyFactory implements Serializable {
 	/**
 	 * Creates a {@link RestartStrategy} instance from the given {@link Configuration}.
 	 *
+	 * 根据配置创建重启策略实例
+	 *
 	 * @return RestartStrategy instance
 	 * @throws Exception which indicates that the RestartStrategy could not be instantiated.
 	 */
@@ -89,6 +91,7 @@ public abstract class RestartStrategyFactory implements Serializable {
 				// support deprecated ConfigConstants values
 				final int numberExecutionRetries = configuration.getInteger(ConfigConstants.RESTART_STRATEGY_FIXED_DELAY_ATTEMPTS,
 					ConfigConstants.DEFAULT_EXECUTION_RETRIES);
+				// akka 能容忍心跳检查多长时间没响应
 				String pauseString = configuration.getString(AkkaOptions.WATCH_HEARTBEAT_PAUSE);
 				String delayString = configuration.getString(ConfigConstants.RESTART_STRATEGY_FIXED_DELAY_DELAY,
 					pauseString);

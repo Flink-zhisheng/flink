@@ -46,6 +46,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ *
  * This class provides simple utility methods for reading and parsing program arguments from different sources.
  */
 @Public
@@ -58,6 +59,8 @@ public class ParameterTool extends ExecutionConfig.GlobalJobParameters implement
 	// ------------------ Constructors ------------------------
 
 	/**
+	 * 解析 args
+	 *
 	 * Returns {@link ParameterTool} for the given arguments. The arguments are keys followed by values.
 	 * Keys have to start with '-' or '--'
 	 *

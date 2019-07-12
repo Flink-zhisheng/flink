@@ -43,6 +43,8 @@ import org.apache.flink.runtime.util.SignalHandler;
 import javax.annotation.Nullable;
 
 /**
+ * 单机模式下的启动入口
+ *
  * Entry point for the standalone session cluster.
  */
 public class StandaloneSessionClusterEntrypoint extends SessionClusterEntrypoint {
@@ -53,21 +55,15 @@ public class StandaloneSessionClusterEntrypoint extends SessionClusterEntrypoint
 
 	@Override
 	protected ResourceManager<?> createResourceManager(
-			Configuration configuration,
-			ResourceID resourceId,
-			RpcService rpcService,
-			HighAvailabilityServices highAvailabilityServices,
-			HeartbeatServices heartbeatServices,
-			MetricRegistry metricRegistry,
-			FatalErrorHandler fatalErrorHandler,
-			ClusterInformation clusterInformation,
+			Configuration configuration, ResourceID resourceId, RpcService rpcService,
+			HighAvailabilityServices highAvailabilityServices, HeartbeatServices heartbeatServices,
+			MetricRegistry metricRegistry, FatalErrorHandler fatalErrorHandler, ClusterInformation clusterInformation,
 			@Nullable String webInterfaceUrl) throws Exception {
 		final ResourceManagerConfiguration resourceManagerConfiguration = ResourceManagerConfiguration.fromConfiguration(configuration);
 		final ResourceManagerRuntimeServicesConfiguration resourceManagerRuntimeServicesConfiguration = ResourceManagerRuntimeServicesConfiguration.fromConfiguration(configuration);
 		final ResourceManagerRuntimeServices resourceManagerRuntimeServices = ResourceManagerRuntimeServices.fromConfiguration(
 			resourceManagerRuntimeServicesConfiguration,
-			highAvailabilityServices,
-			rpcService.getScheduledExecutor());
+			highAvailabilityServices, rpcService.getScheduledExecutor());
 		SlotManager slotManager = new DynamicAssigningSlotManager(
 				rpcService.getScheduledExecutor(),
 				resourceManagerRuntimeServicesConfiguration.getSlotManagerConfiguration().getTaskManagerRequestTimeout(),
@@ -77,18 +73,9 @@ public class StandaloneSessionClusterEntrypoint extends SessionClusterEntrypoint
 						Time.seconds(AkkaUtils.INF_TIMEOUT().toSeconds()),
 				resourceManagerRuntimeServicesConfiguration.getSlotManagerConfiguration().getTaskManagerCheckerInitialDelay());
 		return new StandaloneResourceManager(
-			rpcService,
-			FlinkResourceManager.RESOURCE_MANAGER_NAME,
-			resourceId,
-			configuration,
-			resourceManagerConfiguration,
-			highAvailabilityServices,
-			heartbeatServices,
-			slotManager,
-			metricRegistry,
-			resourceManagerRuntimeServices.getJobLeaderIdService(),
-			clusterInformation,
-			fatalErrorHandler);
+			rpcService, FlinkResourceManager.RESOURCE_MANAGER_NAME, resourceId, configuration,
+			resourceManagerConfiguration, highAvailabilityServices, heartbeatServices, slotManager,
+			metricRegistry, resourceManagerRuntimeServices.getJobLeaderIdService(), clusterInformation, fatalErrorHandler);
 	}
 
 	public static void main(String[] args) {

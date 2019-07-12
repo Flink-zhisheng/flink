@@ -61,6 +61,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 /**
+ *
  * Base class for per-job cluster entry points.
  */
 public abstract class JobClusterEntrypoint extends ClusterEntrypoint {
@@ -102,19 +103,11 @@ public abstract class JobClusterEntrypoint extends ClusterEntrypoint {
 
 	@Override
 	protected Dispatcher createDispatcher(
-			Configuration configuration,
-			RpcService rpcService,
-			HighAvailabilityServices highAvailabilityServices,
-			ResourceManagerGateway resourceManagerGateway,
-			BlobServer blobServer,
-			HeartbeatServices heartbeatServices,
-			JobManagerMetricGroup jobManagerMetricGroup,
-			@Nullable String metricQueryServicePath,
-			ArchivedExecutionGraphStore archivedExecutionGraphStore,
-			FatalErrorHandler fatalErrorHandler,
-			@Nullable String restAddress,
-			HistoryServerArchivist historyServerArchivist,
-			LeaderShipLostHandler leaderShipLostHandler) throws Exception {
+			Configuration configuration, RpcService rpcService, HighAvailabilityServices highAvailabilityServices,
+			ResourceManagerGateway resourceManagerGateway, BlobServer blobServer, HeartbeatServices heartbeatServices,
+			JobManagerMetricGroup jobManagerMetricGroup, @Nullable String metricQueryServicePath,
+			ArchivedExecutionGraphStore archivedExecutionGraphStore, FatalErrorHandler fatalErrorHandler,
+			@Nullable String restAddress, HistoryServerArchivist historyServerArchivist, LeaderShipLostHandler leaderShipLostHandler) throws Exception {
 
 		final JobGraph jobGraph = retrieveJobGraph(configuration);
 
@@ -122,24 +115,10 @@ public abstract class JobClusterEntrypoint extends ClusterEntrypoint {
 
 		final ExecutionMode executionMode = ExecutionMode.valueOf(executionModeValue);
 
-		final MiniDispatcher dispatcher = new MiniDispatcher(
-			rpcService,
-			Dispatcher.DISPATCHER_NAME,
-			configuration,
-			highAvailabilityServices,
-			resourceManagerGateway,
-			blobServer,
-			heartbeatServices,
-			jobManagerMetricGroup,
-			metricQueryServicePath,
-			archivedExecutionGraphStore,
-			Dispatcher.DefaultJobManagerRunnerFactory.INSTANCE,
-			fatalErrorHandler,
-			restAddress,
-			historyServerArchivist,
-			jobGraph,
-			executionMode,
-			leaderShipLostHandler);
+		final MiniDispatcher dispatcher = new MiniDispatcher(rpcService, Dispatcher.DISPATCHER_NAME, configuration, highAvailabilityServices,
+			resourceManagerGateway, blobServer, heartbeatServices, jobManagerMetricGroup, metricQueryServicePath,
+			archivedExecutionGraphStore, Dispatcher.DefaultJobManagerRunnerFactory.INSTANCE, fatalErrorHandler,
+			restAddress, historyServerArchivist, jobGraph, executionMode, leaderShipLostHandler);
 
 		registerShutdownActions(dispatcher.getJobTerminationFuture());
 

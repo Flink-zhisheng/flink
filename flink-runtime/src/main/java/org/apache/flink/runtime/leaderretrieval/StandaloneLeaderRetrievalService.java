@@ -61,6 +61,8 @@ public class StandaloneLeaderRetrievalService implements LeaderRetrievalService 
 	}
 
 	/**
+	 * 使用给定的 leader 地址创建一个 StandaloneLeaderRetrievalService
+	 *
 	 * Creates a StandaloneLeaderRetrievalService with the given leader address.
 	 *
 	 * @param leaderAddress The leader's pre-configured address

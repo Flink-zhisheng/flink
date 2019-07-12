@@ -178,6 +178,7 @@ public class WebRuntimeMonitor implements WebMonitor {
 			throw new IllegalArgumentException("Web frontend port is invalid: " + configuredPort);
 		}
 
+		//加载所有的 log 和 stdout 文件
 		final WebMonitorUtils.LogFileLocation logFiles = WebMonitorUtils.LogFileLocation.find(config);
 
 		// create an empty directory in temp for the web server
@@ -555,6 +556,8 @@ public class WebRuntimeMonitor implements WebMonitor {
 		return configuration.getString(WebOptions.TMP_DIR);
 	}
 
+	//获取所有的 job jar 包
+	//见博客：http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/
 	private File getUploadDir(Configuration configuration) {
 		File baseDir = new File(configuration.getString(WebOptions.UPLOAD_DIR,
 			getBaseDirStr(configuration)));

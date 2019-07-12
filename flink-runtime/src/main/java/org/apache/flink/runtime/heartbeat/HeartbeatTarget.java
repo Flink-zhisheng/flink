@@ -21,6 +21,7 @@ package org.apache.flink.runtime.heartbeat;
 import org.apache.flink.runtime.clusterframework.types.ResourceID;
 
 /**
+ *
  * Interface for components which can be sent heartbeats and from which one can request a
  * heartbeat response. Both the heartbeat response as well as the heartbeat request can carry a
  * payload. This payload is reported to the heartbeat target and contains additional information.

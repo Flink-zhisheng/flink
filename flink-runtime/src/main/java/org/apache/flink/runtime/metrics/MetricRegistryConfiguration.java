@@ -40,6 +40,7 @@ import java.util.stream.Collectors;
 
 /**
  * Configuration object for {@link MetricRegistryImpl}.
+ *
  */
 public class MetricRegistryConfiguration {
 

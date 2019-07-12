@@ -27,6 +27,8 @@ import org.apache.flink.util.Preconditions;
 import org.slf4j.Logger;
 
 /**
+ * 心跳检查服务
+ *
  * HeartbeatServices gives access to all services needed for heartbeating. This includes the
  * creation of heartbeat receivers and heartbeat senders.
  */

@@ -478,7 +478,9 @@ public abstract class ClusterClient<T> {
 			List<URL> libraries, List<URL> classpaths, List<URI> libjars, List<URI> files,
 			ClassLoader classLoader, SavepointRestoreSettings savepointSettings, boolean detached)
 			throws ProgramInvocationException {
+		//获取 JobGraph
 		JobGraph job = getJobGraph(flinkConfig, compiledPlan, libraries, classpaths, libjars, files, savepointSettings);
+		//提交 Job
 		return submitJob(job, classLoader, detached);
 	}
 
@@ -915,6 +917,7 @@ public abstract class ClusterClient<T> {
 			job.setSavepointRestoreSettings(savepointSettings);
 		} else {
 			JobGraphGenerator gen = new JobGraphGenerator(flinkConfig);
+			//通过 JobGraphGenerator 编译 JobGraph
 			job = gen.compileJobGraph((OptimizedPlan) optPlan);
 		}
 		for (URL jar : jarFiles) {

@@ -21,6 +21,8 @@ package org.apache.flink.runtime.taskexecutor.exceptions;
 import org.apache.flink.runtime.taskexecutor.TaskExecutor;
 
 /**
+ * TaskExecutor 端 checkpointing 出现错误
+ *
  * Exception indicating a problem with checkpointing on the {@link TaskExecutor} side.
  */
 public class CheckpointException extends TaskManagerException {

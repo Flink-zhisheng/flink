@@ -86,6 +86,8 @@ public class BootstrapTools {
 	}
 
 	/**
+	 * 用给定的配置启动一个 ActorSystem，监听地址/端口
+	 *
 	 * Starts an ActorSystem with the given configuration listening at the address/ports.
 	 * @param configuration The Flink configuration
 	 * @param listeningAddress The address to listen at.

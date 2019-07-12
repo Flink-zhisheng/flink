@@ -58,6 +58,8 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
  * On-demand allocation means that the memory manager only keeps track how many memory segments are
  * currently allocated (bookkeeping only). Releasing a memory segment will not add it back to the pool,
  * but make it re-claimable by the garbage collector.
+ *
+ *
  */
 public class MemoryManager {
 

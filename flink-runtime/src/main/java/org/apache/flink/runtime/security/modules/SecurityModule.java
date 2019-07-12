@@ -21,6 +21,8 @@ package org.apache.flink.runtime.security.modules;
 import java.security.GeneralSecurityException;
 
 /**
+ * 可安装的安全模块接口
+ *
  * An installable security module.
  */
 public interface SecurityModule {

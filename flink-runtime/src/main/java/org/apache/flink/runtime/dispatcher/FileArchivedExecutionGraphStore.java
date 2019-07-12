@@ -56,6 +56,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 存储归档的执行图，将归档的执行图写入磁盘，并将最近使用的执行图保存在内存缓存中，以便更快地提供服务。此外，还会定期清理存储的执行图。
+ *
  * Store for {@link ArchivedExecutionGraph}. The store writes the archived execution graph to disk
  * and keeps the most recently used execution graphs in a memory cache for faster serving. Moreover,
  * the stored execution graphs are periodically cleaned up.

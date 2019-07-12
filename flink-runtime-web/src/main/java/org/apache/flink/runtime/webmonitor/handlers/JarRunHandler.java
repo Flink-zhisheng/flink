@@ -62,6 +62,8 @@ import static org.apache.flink.shaded.guava18.com.google.common.base.Strings.emp
 
 /**
  * Handler to submit jobs uploaded via the Web UI.
+ *
+ * UI 提交 job
  */
 public class JarRunHandler extends
 		AbstractRestHandler<DispatcherGateway, JarRunRequestBody, JarRunResponseBody, JarRunMessageParameters> {

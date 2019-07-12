@@ -24,6 +24,7 @@ import org.apache.flink.util.SerializedThrowable;
 import java.io.Serializable;
 
 /**
+ * 错误的信息（包含异常的信息和时间戳）
  * Simple container to hold an exception and the corresponding timestamp.
  */
 public class ErrorInfo implements Serializable {

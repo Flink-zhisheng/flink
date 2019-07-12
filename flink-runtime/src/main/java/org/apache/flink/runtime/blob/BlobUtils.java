@@ -100,6 +100,13 @@ public class BlobUtils {
 		}
 	}
 
+	/**
+	 * 创建文件系统 Blob 存储
+	 *
+	 * @param configuration
+	 * @return
+	 * @throws IOException
+	 */
 	private static BlobStoreService createFileSystemBlobStore(Configuration configuration) throws IOException {
 		String storagePath = configuration.getValue(
 			HighAvailabilityOptions.HA_STORAGE_PATH);

@@ -38,6 +38,8 @@ import java.nio.file.StandardCopyOption;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ * 负责安装流程范围的 JAAS 配置
+ *
  * Responsible for installing a process-wide JAAS configuration.
  *
  * <p>The installed configuration combines login modules based on:

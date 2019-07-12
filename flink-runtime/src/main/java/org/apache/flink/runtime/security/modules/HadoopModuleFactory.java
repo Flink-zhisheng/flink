@@ -26,6 +26,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 检查 Hadoop 依赖在创建一个 HadoopModule 时是否可用
+ *
  * A {@link SecurityModuleFactory} for {@link HadoopModule}. This checks if Hadoop dependencies
  * are available before creating a {@link HadoopModule}.
  */

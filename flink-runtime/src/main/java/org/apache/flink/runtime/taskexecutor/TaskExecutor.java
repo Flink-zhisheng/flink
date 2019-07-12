@@ -150,8 +150,8 @@ import static org.apache.flink.util.Preconditions.checkArgument;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
- * TaskExecutor implementation. The task executor is responsible for the execution of multiple
- * {@link Task}.
+ * TaskExecutor implementation. The task executor is responsible for the execution of multiple Task
+ * task executor 负责执行多个任务
  */
 public class TaskExecutor extends RpcEndpoint implements TaskExecutorGateway {
 
@@ -305,9 +305,10 @@ public class TaskExecutor extends RpcEndpoint implements TaskExecutorGateway {
 
 	@Override
 	public void start() throws Exception {
+		//1、调用父类的 start 方法
 		super.start();
 
-		// start by connecting to the ResourceManager
+		//2、连接资源管理器
 		try {
 			startRegistrationTimeout();
 			resourceManagerLeaderRetriever.start(new ResourceManagerLeaderListener());
@@ -315,12 +316,13 @@ public class TaskExecutor extends RpcEndpoint implements TaskExecutorGateway {
 			onFatalError(e);
 		}
 
-		// tell the task slot table who's responsible for the task slot actions
+		//3、tell the task slot table who's responsible for the task slot actions
 		taskSlotTable.start(new SlotActionsImpl());
 
-		// start the job leader service
+		//4、启动 job leader 服务
 		jobLeaderService.start(getAddress(), getRpcService(), haServices, new JobLeaderListenerImpl());
 
+		//5、文件缓存
 		fileCache = new FileCache(taskManagerConfiguration.getTmpDirectories(), blobCacheService.getPermanentBlobService());
 	}
 
@@ -1299,6 +1301,7 @@ public class TaskExecutor extends RpcEndpoint implements TaskExecutorGateway {
 
 	private void establishJobManagerConnection(JobID jobId, final JobMasterGateway jobMasterGateway, JMTMRegistrationSuccess registrationSuccess) {
 		// Remove pending reconnection if there is one.
+		//如果存在挂起的连接，移除
 		reconnectingJobManagerTable.remove(jobId);
 
 		if (jobManagerTable.contains(jobId)) {
@@ -1745,8 +1748,9 @@ public class TaskExecutor extends RpcEndpoint implements TaskExecutorGateway {
 		log.debug("Free slot with allocation id {} because: {}", allocationId, cause.getMessage());
 
 		try {
+			//根据 allocationId 找到对应的 TaskSlot 的所属 JobID
 			final JobID jobId = taskSlotTable.getOwningJob(allocationId);
-
+			//根据 allocationId 释放对应的
 			final int slotIndex = taskSlotTable.freeSlot(allocationId, cause);
 
 			if (slotIndex != -1) {
@@ -1888,6 +1892,7 @@ public class TaskExecutor extends RpcEndpoint implements TaskExecutorGateway {
 			final JMTMRegistrationSuccess registrationMessage) {
 			runAsync(
 				() ->
+					//建立JobManager 连接
 					establishJobManagerConnection(
 						jobId,
 						jobManagerGateway,

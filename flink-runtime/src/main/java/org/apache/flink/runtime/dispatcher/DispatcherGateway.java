@@ -32,11 +32,15 @@ import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ * 调度器组件网关
+ *
  * Gateway for the Dispatcher component.
  */
 public interface DispatcherGateway extends FencedRpcGateway<DispatcherId>, RestfulGateway {
 
 	/**
+	 * 提交 job 到 调度器
+	 *
 	 * Submit a job to the dispatcher.
 	 *
 	 * @param jobGraph JobGraph to submit
@@ -48,6 +52,8 @@ public interface DispatcherGateway extends FencedRpcGateway<DispatcherId>, Restf
 		@RpcTimeout Time timeout);
 
 	/**
+	 * 列举提交的 job
+	 *
 	 * List the current set of submitted jobs.
 	 *
 	 * @param timeout RPC timeout
@@ -57,6 +63,8 @@ public interface DispatcherGateway extends FencedRpcGateway<DispatcherId>, Restf
 		@RpcTimeout Time timeout);
 
 	/**
+	 * 获取 Blob server 的端口号
+	 *
 	 * Returns the port of the blob server.
 	 *
 	 * @param timeout of the operation

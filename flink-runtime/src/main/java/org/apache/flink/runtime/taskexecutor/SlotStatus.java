@@ -32,6 +32,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
  * This describes the slot current status which located in TaskManager.
+ * TaskManager 当前的 slot 状态
  */
 public class SlotStatus implements Serializable {
 

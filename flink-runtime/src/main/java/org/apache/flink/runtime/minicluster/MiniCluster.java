@@ -239,13 +239,14 @@ public class MiniCluster implements JobExecutorService, AutoCloseableAsync {
 				initializeIOFormatClasses(configuration);
 
 				LOG.info("Starting Metrics Registry");
+				//创建 Metrics Registry
 				metricRegistry = createMetricRegistry(configuration);
 
 				final RpcService jobManagerRpcService;
 				final RpcService resourceManagerRpcService;
 				final RpcService[] taskManagerRpcServices = new RpcService[numTaskManagers];
 
-				// bring up all the RPC services
+				//开启所有的 RPC 服务
 				LOG.info("Starting RPC Service(s)");
 
 				// we always need the 'commonRpcService' for auxiliary calls
@@ -266,9 +267,8 @@ public class MiniCluster implements JobExecutorService, AutoCloseableAsync {
 					this.resourceManagerRpcService = null;
 					this.jobManagerRpcService = null;
 					this.taskManagerRpcServices = null;
-				}
-				else {
-					// start a new service per component, possibly with custom bind addresses
+				} else {
+					// 为每个组件启动一个新服务，可能使用自定义绑定地址
 					final String jobManagerBindAddress = miniClusterConfiguration.getJobManagerBindAddress();
 					final String taskManagerBindAddress = miniClusterConfiguration.getTaskManagerBindAddress();
 					final String resourceManagerBindAddress = miniClusterConfiguration.getResourceManagerBindAddress();
@@ -277,8 +277,7 @@ public class MiniCluster implements JobExecutorService, AutoCloseableAsync {
 					resourceManagerRpcService = createRpcService(configuration, rpcTimeout, true, resourceManagerBindAddress);
 
 					for (int i = 0; i < numTaskManagers; i++) {
-						taskManagerRpcServices[i] = createRpcService(
-								configuration, rpcTimeout, true, taskManagerBindAddress);
+						taskManagerRpcServices[i] = createRpcService(configuration, rpcTimeout, true, taskManagerBindAddress);
 					}
 
 					this.jobManagerRpcService = jobManagerRpcService;
@@ -286,66 +285,45 @@ public class MiniCluster implements JobExecutorService, AutoCloseableAsync {
 					this.resourceManagerRpcService = resourceManagerRpcService;
 				}
 
-				// create the high-availability services
+				// 创建高可用服务
 				LOG.info("Starting high-availability services");
 				haServices = HighAvailabilityServicesUtils.createAvailableOrEmbeddedServices(
-					configuration,
-					commonRpcService.getExecutor());
-
+					configuration, commonRpcService.getExecutor());
+				//创建并启动 blob 服务
 				blobServer = new BlobServer(configuration, haServices.createBlobStore());
 				blobServer.start();
-
+				//创建心跳服务
 				heartbeatServices = HeartbeatServices.fromConfiguration(configuration);
 
-				// bring up the ResourceManager(s)
+				// 开启资源管理器
 				LOG.info("Starting ResourceManger");
 				resourceManagerRunner = startResourceManager(
-					configuration,
-					haServices,
-					heartbeatServices,
-					metricRegistry,
-					resourceManagerRpcService,
-					new ClusterInformation("localhost", blobServer.getPort()));
+					configuration, haServices, heartbeatServices, metricRegistry,
+					resourceManagerRpcService, new ClusterInformation("localhost", blobServer.getPort()));
 
 				blobCacheService = new BlobCacheService(
 					configuration, haServices.createBlobStore(), new InetSocketAddress(InetAddress.getLocalHost(), blobServer.getPort())
 				);
 
-				// bring up the TaskManager(s) for the mini cluster
+				//启动 TaskManager(s) for the mini cluster
 				LOG.info("Starting {} TaskManger(s)", numTaskManagers);
 				taskManagers = startTaskManagers(
-					configuration,
-					haServices,
-					heartbeatServices,
-					metricRegistry,
-					blobCacheService,
-					numTaskManagers,
-					taskManagerRpcServices);
+					configuration, haServices, heartbeatServices, metricRegistry, blobCacheService,
+					numTaskManagers, taskManagerRpcServices);
 
 				// starting the dispatcher rest endpoint
 				LOG.info("Starting dispatcher rest endpoint.");
 
 				dispatcherGatewayRetriever = new RpcGatewayRetriever<>(
-					jobManagerRpcService,
-					DispatcherGateway.class,
-					DispatcherId::fromUuid,
-					20,
-					Time.milliseconds(20L));
+					jobManagerRpcService, DispatcherGateway.class, DispatcherId::fromUuid, 20, Time.milliseconds(20L));
 				final RpcGatewayRetriever<ResourceManagerId, ResourceManagerGateway> resourceManagerGatewayRetriever = new RpcGatewayRetriever<>(
-					jobManagerRpcService,
-					ResourceManagerGateway.class,
-					ResourceManagerId::fromUuid,
-					20,
-					Time.milliseconds(20L));
+					jobManagerRpcService, ResourceManagerGateway.class, ResourceManagerId::fromUuid, 20, Time.milliseconds(20L));
 
 				this.dispatcherRestEndpoint = new DispatcherRestEndpoint(
 					RestServerEndpointConfiguration.fromConfiguration(configuration),
-					dispatcherGatewayRetriever,
-					configuration,
-					RestHandlerConfiguration.fromConfiguration(configuration),
-					resourceManagerGatewayRetriever,
-					blobServer.getTransientBlobService(),
-					commonRpcService.getExecutor(),
+					dispatcherGatewayRetriever, configuration,
+					RestHandlerConfiguration.fromConfiguration(configuration), resourceManagerGatewayRetriever,
+					blobServer.getTransientBlobService(), commonRpcService.getExecutor(),
 					new AkkaQueryServiceRetriever(
 						actorSystem,
 						Time.milliseconds(configuration.getLong(WebOptions.TIMEOUT))),
@@ -363,15 +341,11 @@ public class MiniCluster implements JobExecutorService, AutoCloseableAsync {
 
 				final HistoryServerArchivist historyServerArchivist = HistoryServerArchivist.createHistoryServerArchivist(configuration, dispatcherRestEndpoint);
 
+				//创建 standalone 调度器
 				dispatcher = new StandaloneDispatcher(
-					jobManagerRpcService,
-					Dispatcher.DISPATCHER_NAME + UUID.randomUUID(),
-					configuration,
-					haServices,
-					resourceManagerRunner.getResourceManageGateway(),
-					blobServer,
-					heartbeatServices,
-					jobManagerMetricGroup,
+					jobManagerRpcService, Dispatcher.DISPATCHER_NAME + UUID.randomUUID(),
+					configuration, haServices, resourceManagerRunner.getResourceManageGateway(),
+					blobServer, heartbeatServices, jobManagerMetricGroup,
 					metricRegistry.getMetricQueryServicePath(),
 					new MemoryArchivedExecutionGraphStore(),
 					Dispatcher.DefaultJobManagerRunnerFactory.INSTANCE,
@@ -379,7 +353,7 @@ public class MiniCluster implements JobExecutorService, AutoCloseableAsync {
 					dispatcherRestEndpoint.getRestBaseUrl(),
 					historyServerArchivist,
 					new IgnoreLeaderShipLostHandler());
-
+				//启动 standalone 调度器
 				dispatcher.start();
 
 				resourceManagerLeaderRetriever = haServices.getResourceManagerLeaderRetriever();
@@ -609,10 +583,11 @@ public class MiniCluster implements JobExecutorService, AutoCloseableAsync {
 	@Override
 	public JobSubmissionResult executeJob(JobGraph job, boolean detached) throws JobExecutionException, InterruptedException {
 		checkNotNull(job, "job is null");
-
+		//提交 job
 		final CompletableFuture<JobSubmissionResult> submissionFuture = submitJob(job);
 		if (detached) {
 			try {
+				//获取 job 提交返回的结果
 				return submissionFuture.get();
 			} catch (ExecutionException e) {
 				throw new JobExecutionException(job.getJobID(), "Fail to submit Job", ExceptionUtils.stripExecutionException(e));

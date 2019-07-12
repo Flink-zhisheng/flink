@@ -29,6 +29,9 @@ import javax.annotation.Nullable;
 
 /**
  * {@link RequestBody} for running a jar.
+ *
+ * 运行一个 jar 的请求参数 body
+ *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class JarRunRequestBody implements RequestBody {

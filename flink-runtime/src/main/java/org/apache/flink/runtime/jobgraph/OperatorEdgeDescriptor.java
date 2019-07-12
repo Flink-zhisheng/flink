@@ -25,6 +25,7 @@ import java.io.Serializable;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ *
  * The type Operator edge descriptor.
  */
 public class OperatorEdgeDescriptor implements Serializable {

@@ -177,9 +177,11 @@ public class RemoteStreamEnvironment extends StreamExecutionEnvironment {
 
 	@Override
 	protected JobSubmissionResult executeInternal(String jobName, boolean detached, SavepointRestoreSettings savepointRestoreSettings) throws ProgramInvocationException {
+		//获取 StreamGraph
 		StreamGraph streamGraph = getStreamGraph();
 		streamGraph.setJobName(jobName);
 		transformations.clear();
+		//执行远程的 job
 		return executeRemotely(streamGraph, jarFiles, detached, savepointRestoreSettings);
 	}
 
@@ -230,7 +232,7 @@ public class RemoteStreamEnvironment extends StreamExecutionEnvironment {
 	}
 
 	private ClusterClient<?> prepareClusterClient(boolean detached) throws Exception {
-
+		//配置
 		Configuration configuration = new Configuration();
 		configuration.addAll(this.clientConfiguration);
 

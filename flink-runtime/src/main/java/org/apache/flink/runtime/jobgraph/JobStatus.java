@@ -19,6 +19,8 @@
 package org.apache.flink.runtime.jobgraph;
 
 /**
+ * job 的状态
+ *
  * Possible states of a job once it has been accepted by the job manager.
  */
 public enum JobStatus {

@@ -29,6 +29,7 @@ import org.apache.flink.runtime.webmonitor.history.JsonArchivist;
 import java.util.concurrent.CompletableFuture;
 
 /**
+ *
  * Writer for an {@link AccessExecutionGraph}.
  */
 public interface HistoryServerArchivist {

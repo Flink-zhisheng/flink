@@ -33,11 +33,15 @@ import javax.annotation.Nullable;
 import java.util.Map;
 
 /**
+ *
+ *
  * Common interface for the runtime {@link ExecutionGraph} and {@link ArchivedExecutionGraph}.
  */
 public interface AccessExecutionGraph {
 	/**
 	 * Returns the job plan as a JSON string.
+	 *
+	 * 返回 job 的计划（json 格式）
 	 *
 	 * @return job plan as a JSON string
 	 */
@@ -67,6 +71,8 @@ public interface AccessExecutionGraph {
 	/**
 	 * Returns the exception that caused the job to fail. This is the first root exception
 	 * that was not recoverable and triggered job failure.
+	 *
+	 * 返回导致 job 失败的 exception 信息
 	 *
 	 * @return failure causing exception, or null
 	 */

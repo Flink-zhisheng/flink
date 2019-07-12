@@ -44,6 +44,8 @@ import java.util.concurrent.Executor;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ *
+ *
  * Utils class to instantiate {@link HighAvailabilityServices} implementations.
  */
 public class HighAvailabilityServicesUtils {
@@ -51,6 +53,7 @@ public class HighAvailabilityServicesUtils {
 	public static HighAvailabilityServices createAvailableOrEmbeddedServices(
 		Configuration config,
 		Executor executor) throws Exception {
+		//获取到了 HA 配置的状态，三种可能
 		HighAvailabilityMode highAvailabilityMode = LeaderRetrievalUtils.getRecoveryMode(config);
 
 		switch (highAvailabilityMode) {

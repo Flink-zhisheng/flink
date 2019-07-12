@@ -20,11 +20,17 @@ package org.apache.flink.runtime.rpc;
 
 /**
  * Handler for fatal errors.
+ *
+ * 严重错误的处理器
  */
 public interface FatalErrorHandler {
 
 	/**
 	 * Being called when a fatal error occurs.
+	 *
+	 * 当出现严重错误的时候就会回调该方法
+	 *
+	 * 这个调用永远不会阻塞，因为它可能是从 RpcEndpoint 的主线程中调用的
 	 *
 	 * <p>IMPORTANT: This call should never be blocking since it might be called from within
 	 * the main thread of an {@link RpcEndpoint}.

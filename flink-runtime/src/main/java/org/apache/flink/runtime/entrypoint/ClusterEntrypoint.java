@@ -98,6 +98,10 @@ import scala.concurrent.duration.FiniteDuration;
 /**
  * Base class for the Flink cluster entry points.
  *
+ * Flink 集群入口点基础类
+ *
+ * 此类的专门化可用于会话模式和每个作业模式
+ *
  * <p>Specialization of this class can be used for the session mode and the per-job mode
  */
 public abstract class ClusterEntrypoint implements FatalErrorHandler, LeaderShipLostHandler {
@@ -259,26 +263,31 @@ public abstract class ClusterEntrypoint implements FatalErrorHandler, LeaderShip
 		LOG.info("Initializing cluster services.");
 
 		synchronized (lock) {
+			//从配置文件中读取到 JobManager 的地址
 			final String bindAddress = configuration.getString(JobManagerOptions.ADDRESS);
+			//从配置文件中获取 RPC 端口
 			final String portRange = getRPCPortRange(configuration);
-
+			//创建 Akka RPC 服务
 			commonRpcService = createRpcService(configuration, bindAddress, portRange);
 
-			// update the configuration used to create the high availability services
+			//更新配置（创建高可用服务）
 			configuration.setString(JobManagerOptions.ADDRESS, commonRpcService.getAddress());
 			configuration.setInteger(JobManagerOptions.PORT, commonRpcService.getPort());
-
+			//创建 HA 服务
 			haServices = createHaServices(configuration, commonRpcService.getExecutor());
+			//创建 Blob Server
 			blobServer = new BlobServer(configuration, haServices.createBlobStore());
 			blobServer.start();
+			//创建心跳服务
 			heartbeatServices = createHeartbeatServices(configuration);
+			//创建 metric 注册服务
 			metricRegistry = createMetricRegistry(configuration);
 
 			// TODO: This is a temporary hack until we have ported the MetricQueryService to the new RpcEndpoint
 			// start the MetricQueryService
 			final ActorSystem actorSystem = ((AkkaRpcService) commonRpcService).getActorSystem();
 			metricRegistry.startQueryService(actorSystem, null);
-
+			//创建可序列化的 ExecutionGraph
 			archivedExecutionGraphStore = createSerializableExecutionGraphStore(configuration, commonRpcService.getScheduledExecutor());
 
 			clusterInformation = new ClusterInformation(
@@ -323,6 +332,7 @@ public abstract class ClusterEntrypoint implements FatalErrorHandler, LeaderShip
 			final ActorSystem actorSystem = ((AkkaRpcService) rpcService).getActorSystem();
 			final Time timeout = Time.milliseconds(configuration.getLong(WebOptions.TIMEOUT));
 
+			//创建 Rest Endpoint
 			webMonitorEndpoint = createRestEndpoint(
 				configuration,
 				dispatcherGatewayRetriever,
@@ -335,6 +345,7 @@ public abstract class ClusterEntrypoint implements FatalErrorHandler, LeaderShip
 			LOG.debug("Starting Dispatcher REST endpoint.");
 			webMonitorEndpoint.start();
 
+			//创建资源管理器
 			resourceManager = createResourceManager(
 				configuration,
 				ResourceID.generate(),
@@ -346,10 +357,13 @@ public abstract class ClusterEntrypoint implements FatalErrorHandler, LeaderShip
 				clusterInformation,
 				webMonitorEndpoint.getRestBaseUrl());
 
+			//job manager 的 metric 数据，主要是 JVM 的数据（ClassLoader、GarbageCollector、Memory、Threads、CPU）
 			jobManagerMetricGroup = MetricUtils.instantiateJobManagerMetricGroup(metricRegistry, rpcService.getAddress());
 
+			//JobManager 中存储已完成的作业存档
 			final HistoryServerArchivist historyServerArchivist = HistoryServerArchivist.createHistoryServerArchivist(configuration, webMonitorEndpoint);
 
+			//创建调度器
 			dispatcher = createDispatcher(
 				configuration,
 				rpcService,
@@ -376,6 +390,9 @@ public abstract class ClusterEntrypoint implements FatalErrorHandler, LeaderShip
 	}
 
 	/**
+	 * 获取 RpcService 的端口，如果是高可用的话从 high-availability.jobmanager.port 获取
+	 * 否则从 jobmanager.rpc.port 获取端口
+	 *
 	 * Returns the port range for the common {@link RpcService}.
 	 *
 	 * @param configuration to extract the port range from
@@ -398,6 +415,14 @@ public abstract class ClusterEntrypoint implements FatalErrorHandler, LeaderShip
 		return new AkkaRpcService(actorSystem, Time.of(duration.length(), duration.unit()));
 	}
 
+	/**
+	 * 创建 HA 服务
+	 *
+	 * @param configuration
+	 * @param executor
+	 * @return
+	 * @throws Exception
+	 */
 	protected HighAvailabilityServices createHaServices(
 		Configuration configuration,
 		Executor executor) throws Exception {
@@ -530,6 +555,11 @@ public abstract class ClusterEntrypoint implements FatalErrorHandler, LeaderShip
 		}
 	}
 
+	/**
+	 * 当出现严重错误的时候，打印 error 日志，并直接 System.exit() 退出
+	 *
+	 * @param exception cause
+	 */
 	@Override
 	public void onFatalError(Throwable exception) {
 		LOG.error("Fatal error occurred in the cluster entrypoint.", exception);
@@ -730,11 +760,15 @@ public abstract class ClusterEntrypoint implements FatalErrorHandler, LeaderShip
 	 */
 	public enum ExecutionMode {
 		/**
+		 * 等待作业结果被送达
+		 *
 		 * Waits until the job result has been served.
 		 */
 		NORMAL,
 
 		/**
+		 * 工作完成后直接停止
+		 *
 		 * Directly stops after the job has finished.
 		 */
 		DETACHED

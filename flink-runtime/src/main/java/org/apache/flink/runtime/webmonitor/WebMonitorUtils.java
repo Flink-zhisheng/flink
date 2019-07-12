@@ -85,6 +85,9 @@ public final class WebMonitorUtils {
 		}
 
 		/**
+		 * 日志文件，优先找 log.file 环境变量的路径
+		 * 如果环境没有 log.file，那么就从配置文件中找 web.log.path 的路径
+		 *
 		 * Finds the Flink log directory using log.file Java property that is set during startup.
 		 */
 		public static LogFileLocation find(Configuration config) {

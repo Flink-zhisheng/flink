@@ -264,6 +264,8 @@ public class LeaderRetrievalUtils {
 	}
 
 	/**
+	 * 获取配置的 HA 模块，是否是 NONE 还是 FILESYSTEM、ZOOKEEPER
+	 *
 	 * Gets the recovery mode as configured, based on {@link HighAvailabilityOptions#HA_MODE}.
 	 * 
 	 * @param config The configuration to read the recovery mode from.

@@ -695,6 +695,7 @@ public class WebMonitorEndpoint<T extends RestfulGateway> extends RestServerEndp
 			});
 
 		// load the log and stdout file handler for the main cluster component
+		//加载 log 和 stdout 文件
 		final WebMonitorUtils.LogFileLocation logFileLocation = WebMonitorUtils.LogFileLocation.find(clusterConfiguration);
 
 		final ChannelInboundHandler logFileHandler = createStaticFileHandler(

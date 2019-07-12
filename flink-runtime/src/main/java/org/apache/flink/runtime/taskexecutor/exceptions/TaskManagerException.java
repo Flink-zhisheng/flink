@@ -21,6 +21,8 @@ package org.apache.flink.runtime.taskexecutor.exceptions;
 import org.apache.flink.runtime.taskexecutor.TaskExecutor;
 
 /**
+ * TaskExecutor 的异常基础类
+ *
  * Base exception thrown by the {@link TaskExecutor}.
  */
 public class TaskManagerException extends Exception {

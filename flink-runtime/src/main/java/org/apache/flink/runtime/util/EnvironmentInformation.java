@@ -259,8 +259,9 @@ public class EnvironmentInformation {
 	}
 	
 	/**
-	 * Logs information about the environment, like code revision, current user, Java version,
-	 * and JVM parameters.
+	 * 记录有关环境的信息，如代码修订、当前用户、Java版本和JVM参数
+	 *
+	 * Logs information about the environment, like code revision, current user, Java version, and JVM parameters
 	 *
 	 * @param log The logger to log the information to.
 	 * @param componentName The component name to mention in the log.

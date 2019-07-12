@@ -23,6 +23,12 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.HighAvailabilityOptions;
 
 /**
+ * 高可用模块，flink 配置文件中可以配置
+ *
+ * - NODE
+ * - FILESYSTEM：JobManager 存储 job graphs，checkpoints 到文件系统中，当 JobManager 挂掉后重启可以连接到
+ * - ZooKeeper：JobManager 高可用
+ *
  * High availability mode for Flink's cluster execution. Currently supported modes are:
  *
  * - NONE: No high availability.
@@ -39,6 +45,8 @@ public enum HighAvailabilityMode {
 	ZOOKEEPER;
 
 	/**
+	 * 返回 HighAvailabilityMode 的配置
+	 *
 	 * Return the configured {@link HighAvailabilityMode}.
 	 *
 	 * @param config The config to parse
@@ -50,11 +58,11 @@ public enum HighAvailabilityMode {
 
 		if (haMode == null) {
 			return HighAvailabilityMode.NONE;
-		} else if (haMode.equalsIgnoreCase(ConfigConstants.DEFAULT_RECOVERY_MODE)) {
+		} else if (haMode.equalsIgnoreCase(ConfigConstants.DEFAULT_RECOVERY_MODE)) {//todo：为何有个 standalone？
 			// Map old default to new default
 			return HighAvailabilityMode.NONE;
 		} else {
-			return HighAvailabilityMode.valueOf(haMode.toUpperCase());
+			return HighAvailabilityMode.valueOf(haMode.toUpperCase());//返回 ZOOKEEPER 或者 FILESYSTEM
 		}
 	}
 

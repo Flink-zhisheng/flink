@@ -25,6 +25,7 @@ import org.apache.flink.runtime.executiongraph.ExecutionAttemptID;
 
 /**
  * Responder for checkpoint acknowledge and decline messages in the {@link Task}.
+ *
  */
 public interface CheckpointResponder {
 

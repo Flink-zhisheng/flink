@@ -32,6 +32,7 @@ import java.util.Map;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ *
  * Provides vendor-specific Kerberos {@link AppConfigurationEntry} instances.
  *
  * <p>The implementation is inspired from Hadoop UGI class.

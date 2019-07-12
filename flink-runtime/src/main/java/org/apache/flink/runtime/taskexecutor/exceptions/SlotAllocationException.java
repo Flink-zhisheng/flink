@@ -19,6 +19,8 @@
 package org.apache.flink.runtime.taskexecutor.exceptions;
 
 /**
+ * 在 task manager 上分配 slot 失败的异常
+ *
  * Exception indicating that the slot allocation on the task manager failed.
  */
 public class SlotAllocationException extends TaskManagerException {

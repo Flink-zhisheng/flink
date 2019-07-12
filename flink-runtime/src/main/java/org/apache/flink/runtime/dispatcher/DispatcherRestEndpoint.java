@@ -46,6 +46,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 /**
+ *
  * REST endpoint for the {@link Dispatcher} component.
  */
 public class DispatcherRestEndpoint extends WebMonitorEndpoint<DispatcherGateway> {

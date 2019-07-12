@@ -263,12 +263,15 @@ public abstract class Dispatcher extends FencedRpcEndpoint<DispatcherId> impleme
 	}
 
 	private void persistAndRunJob(JobGraph jobGraph) throws Exception {
+		//将 job 的 JobGraph 存储
 		submittedJobGraphStore.putJobGraph(new SubmittedJobGraph(jobGraph, null));
 
 		try {
+			//运行 job
 			runJob(jobGraph);
 		} catch (Exception e) {
 			try {
+				//抛出异常移除存储的 JobGraph
 				submittedJobGraphStore.removeJobGraph(jobGraph.getJobID());
 			} catch (Exception ie) {
 				e.addSuppressed(ie);

@@ -52,6 +52,8 @@ import static org.apache.flink.runtime.metrics.dump.QueryScopeInfo.INFO_CATEGORY
 import static org.apache.flink.runtime.metrics.dump.QueryScopeInfo.INFO_CATEGORY_TM;
 
 /**
+ *
+ *
  * Utility class for the serialization of metrics.
  */
 public class MetricDumpSerialization {

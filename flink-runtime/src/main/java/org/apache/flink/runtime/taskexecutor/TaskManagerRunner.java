@@ -72,6 +72,8 @@ import java.util.concurrent.TimeUnit;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ * task manager 启动入口类
+ *
  * This class is the executable entry point for the task manager in yarn or standalone mode.
  * It constructs the related components (network, I/O manager, memory manager, RPC service, HA service)
  * and starts them.
@@ -262,7 +264,7 @@ public class TaskManagerRunner implements FatalErrorHandler, AutoCloseableAsync 
 	// --------------------------------------------------------------------------------------------
 
 	public static void main(String[] args) throws Exception {
-		// startup checks and logging
+		// 启动检查和日志记录
 		EnvironmentInformation.logEnvironmentInfo(LOG, "TaskManager", args);
 		SignalHandler.register(LOG);
 		JvmShutdownSafeguard.installAsShutdownHook(LOG);
@@ -274,26 +276,28 @@ public class TaskManagerRunner implements FatalErrorHandler, AutoCloseableAsync 
 		} else {
 			LOG.info("Cannot determine the maximum number of open file descriptors");
 		}
-
+		//解析参数 args
 		ParameterTool parameterTool = ParameterTool.fromArgs(args);
-
+		//获取到配置文件的目录
 		final String configDir = parameterTool.get("configDir");
-
+		//根据配置文件目录地址加载里面所有的配置
 		final Configuration configuration = GlobalConfiguration.loadConfiguration(configDir);
 
 		try {
+			//文件系统初始化
 			FileSystem.initialize(configuration);
 		} catch (IOException e) {
 			throw new IOException("Error while setting the default " +
 				"filesystem scheme from configuration.", e);
 		}
-
+		//安装相关的安全配置
 		SecurityUtils.install(new SecurityConfiguration(configuration));
 
 		try {
 			SecurityUtils.getInstalledContext().runSecured(new Callable<Void>() {
 				@Override
 				public Void call() throws Exception {
+					//最主要的方法
 					runTaskManager(configuration, ResourceID.generate());
 					return null;
 				}
@@ -305,8 +309,9 @@ public class TaskManagerRunner implements FatalErrorHandler, AutoCloseableAsync 
 	}
 
 	public static void runTaskManager(Configuration configuration, ResourceID resourceId) throws Exception {
+		//根据传进来的配置和资源 id 构建了 TaskManagerRunner 实例
 		final TaskManagerRunner taskManagerRunner = new TaskManagerRunner(configuration, resourceId);
-
+		//执行 TaskManagerRunner 中的 start 方法
 		taskManagerRunner.start();
 	}
 

@@ -27,6 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Container for multiple {@link JobManagerConnection} registered under their respective job id.
+ *
  */
 public class JobManagerTable {
 	private final Map<JobID, JobManagerConnection> jobIDIndices;

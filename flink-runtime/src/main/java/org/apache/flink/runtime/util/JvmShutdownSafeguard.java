@@ -92,6 +92,7 @@ public class JvmShutdownSafeguard extends Thread {
 	// ------------------------------------------------------------------------
 
 	/**
+	 *
 	 * Installs the safeguard shutdown hook. The maximum time that the JVM is allowed to spend
 	 * on shutdown before being killed is five seconds.
 	 * 
@@ -102,6 +103,7 @@ public class JvmShutdownSafeguard extends Thread {
 	}
 
 	/**
+	 *
 	 * Installs the safeguard shutdown hook. The maximum time that the JVM is allowed to spend
 	 * on shutdown before being killed is the given number of milliseconds.
 	 * 
