@@ -24,6 +24,7 @@ import static org.apache.flink.client.cli.CliFrontendParser.CANCEL_WITH_SAVEPOIN
 
 /**
  * Command line options for the CANCEL command.
+ * 取消 job 的参数
  */
 public class CancelOptions extends CommandLineOptions {
 
