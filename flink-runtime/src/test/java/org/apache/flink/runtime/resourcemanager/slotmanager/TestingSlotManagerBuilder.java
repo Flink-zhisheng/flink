@@ -16,27 +16,23 @@
  * limitations under the License.
  */
 
-package org.apache.flink.runtime.fs.maprfs;
+package org.apache.flink.runtime.resourcemanager.slotmanager;
 
-import org.apache.flink.core.fs.FileSystem;
-import org.apache.flink.core.fs.Path;
-import org.apache.flink.util.TestLogger;
-
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
+import java.util.function.Consumer;
 
 /**
- * This test checks that the file system is properly accessible through the
- * service loading abstraction.
+ * Factory for {@link TestingSlotManager}.
  */
-public class FileSystemAccessTest extends TestLogger {
+public class TestingSlotManagerBuilder {
 
-	@Test
-	public void testGetMapRFs() throws Exception {
-		final Path path = new Path("maprfs:///my/path");
+	private Consumer<Boolean> setFailUnfulfillableRequestConsumer = ignored -> {};
 
-		FileSystem fs = path.getFileSystem();
-		assertEquals(path.toUri().getScheme(), fs.getUri().getScheme());
+	public TestingSlotManagerBuilder setSetFailUnfulfillableRequestConsumer(Consumer<Boolean> setFailUnfulfillableRequestConsumer) {
+		this.setFailUnfulfillableRequestConsumer = setFailUnfulfillableRequestConsumer;
+		return this;
+	}
+
+	public TestingSlotManager createSlotManager() {
+		return new TestingSlotManager(setFailUnfulfillableRequestConsumer);
 	}
 }
