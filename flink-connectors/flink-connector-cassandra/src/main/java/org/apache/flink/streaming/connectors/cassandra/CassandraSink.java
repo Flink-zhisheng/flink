@@ -42,7 +42,7 @@ import scala.Product;
 
 /**
  * This class wraps different Cassandra sink implementations to provide a common interface for all of them.
- *
+ * 这个类封装了不同的 Cassandra sink 实现，为它们提供了一个公共接口
  * @param <IN> input type
  */
 public class CassandraSink<IN> {
