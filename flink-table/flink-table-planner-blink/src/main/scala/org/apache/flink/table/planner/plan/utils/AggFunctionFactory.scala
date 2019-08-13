@@ -37,11 +37,12 @@ import org.apache.flink.table.runtime.types.TypeInfoLogicalTypeConverter
 import org.apache.flink.table.runtime.typeutils.DecimalTypeInfo
 import org.apache.flink.table.types.logical.LogicalTypeRoot._
 import org.apache.flink.table.types.logical._
-
 import org.apache.calcite.rel.`type`.RelDataType
 import org.apache.calcite.rel.core.AggregateCall
 import org.apache.calcite.sql.fun._
 import org.apache.calcite.sql.{SqlAggFunction, SqlKind, SqlRankFunction}
+
+import java.util
 
 import scala.collection.JavaConversions._
 
@@ -122,7 +123,14 @@ class AggFunctionFactory(
       case a: SqlAggFunction if a.getKind == SqlKind.COLLECT =>
         createCollectAggFunction(argTypes)
 
-      case udagg: AggSqlFunction => udagg.getFunction
+      case udagg: AggSqlFunction =>
+        // Can not touch the literals, Calcite make them in previous RelNode.
+        // In here, all inputs are input refs.
+        val constants = new util.ArrayList[AnyRef]()
+        argTypes.foreach(t => constants.add(null))
+        udagg.makeFunction(
+          constants.toArray,
+          argTypes)
 
       case unSupported: SqlAggFunction =>
         throw new TableException(s"Unsupported Function: '${unSupported.getName}'")
@@ -131,9 +139,17 @@ class AggFunctionFactory(
 
   private def createAvgAggFunction(argTypes: Array[LogicalType]): UserDefinedFunction = {
     argTypes(0).getTypeRoot match {
-      case TINYINT | SMALLINT | INTEGER | BIGINT =>
-        new AvgAggFunction.IntegralAvgAggFunction
-      case FLOAT | DOUBLE =>
+      case TINYINT =>
+        new AvgAggFunction.ByteAvgAggFunction
+      case SMALLINT =>
+        new AvgAggFunction.ShortAvgAggFunction
+      case INTEGER =>
+        new AvgAggFunction.IntAvgAggFunction
+      case BIGINT =>
+        new AvgAggFunction.LongAvgAggFunction
+      case FLOAT =>
+        new AvgAggFunction.FloatAvgAggFunction
+      case DOUBLE =>
         new AvgAggFunction.DoubleAvgAggFunction
       case DECIMAL =>
         val d = argTypes(0).asInstanceOf[DecimalType]
