@@ -24,6 +24,9 @@ import org.apache.flink.runtime.executiongraph.ExecutionAttemptID;
 import org.apache.flink.util.SerializedThrowable;
 
 /**
+ * TaskExecutor -> JobMaster
+ * 告诉 checkpoint coordinator checkpoint 请求未能得到响应。 如果任务已处于 RUNNING 状态但内部尚未准备好执行 checkpoint，则会发生这种情况。
+ *
  * This message is sent from the {@link org.apache.flink.runtime.taskexecutor.TaskExecutor} to the
  * {@link org.apache.flink.runtime.jobmaster.JobMaster} to tell the checkpoint coordinator
  * that a checkpoint request could not be heeded. This can happen if a Task is already in

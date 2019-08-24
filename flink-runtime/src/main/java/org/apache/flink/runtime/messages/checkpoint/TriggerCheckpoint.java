@@ -25,6 +25,8 @@ import org.apache.flink.runtime.executiongraph.ExecutionAttemptID;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ * JobMaster -> TaskExecutor 告诉某个任务触发 checkpoint
+ *
  * This message is sent from the {@link org.apache.flink.runtime.jobmaster.JobMaster} to the
  * {@link org.apache.flink.runtime.taskexecutor.TaskExecutor} to tell a certain task to trigger its
  * checkpoint.

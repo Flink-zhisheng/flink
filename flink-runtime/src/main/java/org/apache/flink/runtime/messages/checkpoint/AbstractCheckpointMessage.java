@@ -22,6 +22,7 @@ import org.apache.flink.api.common.JobID;
 import org.apache.flink.runtime.executiongraph.ExecutionAttemptID;
 
 /**
+ * checkpoint 消息的基础类
  * The base class of all checkpoint messages.
  */
 public abstract class AbstractCheckpointMessage implements java.io.Serializable {
