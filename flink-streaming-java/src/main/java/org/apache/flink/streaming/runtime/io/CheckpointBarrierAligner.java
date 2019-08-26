@@ -121,7 +121,7 @@ public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
 		//如果是多个输入流
 
 		// -- general code path for multiple input channels --
-		//如果收到的 Barrier 大于 0
+		//如果收到的 Barrier 个数大于 0
 		if (numBarriersReceived > 0) {
 			// this is only true if some alignment is already progress and was not canceled
 
