@@ -705,6 +705,7 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 			CheckpointMetrics checkpointMetrics) throws Exception {
 
 		try {
+			//performCheckpoint
 			if (performCheckpoint(checkpointMetaData, checkpointOptions, checkpointMetrics, false)) {
 				if (syncSavepointLatch.isSet()) {
 					syncSavepointLatch.blockUntilCheckpointIsAcknowledged();
@@ -735,6 +736,7 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 		}
 	}
 
+	//真正执行 checkpoint 的地方
 	private boolean performCheckpoint(
 			CheckpointMetaData checkpointMetaData,
 			CheckpointOptions checkpointOptions,
@@ -762,11 +764,13 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 				// We generally try to emit the checkpoint barrier as soon as possible to not affect downstream
 				// checkpoint alignments
 
+				//下面的步骤都是原子性的
 				// Step (1): Prepare the checkpoint, allow operators to do some pre-barrier work.
 				//           The pre-barrier work should be nothing or minimal in the common case.
 				operatorChain.prepareSnapshotPreBarrier(checkpointId);
 
 				// Step (2): Send the checkpoint barrier downstream
+				//向下游广播屏障
 				operatorChain.broadcastCheckpointBarrier(
 						checkpointId,
 						checkpointMetaData.getTimestamp(),
@@ -819,6 +823,7 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 
 				for (StreamOperator<?> operator : operatorChain.getAllOperators()) {
 					if (operator != null) {
+						//通知所有的 operator checkpoint 完成
 						operator.notifyCheckpointComplete(checkpointId);
 					}
 				}
@@ -1208,10 +1213,12 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 			this.operatorSnapshotsInProgress = new HashMap<>(allOperators.length);
 		}
 
+		//执行 checkpoint
 		public void executeCheckpointing() throws Exception {
 			startSyncPartNano = System.nanoTime();
 
 			try {
+				//所有的算子
 				for (StreamOperator<?> op : allOperators) {
 					checkpointStreamOperator(op);
 				}
@@ -1278,7 +1285,7 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 		@SuppressWarnings("deprecation")
 		private void checkpointStreamOperator(StreamOperator<?> op) throws Exception {
 			if (null != op) {
-
+				//利用 snapshotState 方法
 				OperatorSnapshotFutures snapshotInProgress = op.snapshotState(
 						checkpointMetaData.getCheckpointId(),
 						checkpointMetaData.getTimestamp(),

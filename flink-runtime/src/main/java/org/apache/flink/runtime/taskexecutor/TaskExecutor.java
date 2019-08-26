@@ -769,6 +769,7 @@ public class TaskExecutor extends RpcEndpoint implements TaskExecutorGateway {
 
 	// ----------------------------------------------------------------------
 	// Checkpointing RPCs
+	// TaskManager 收到 Checkpoint 后的处理
 	// ----------------------------------------------------------------------
 
 	@Override
@@ -788,6 +789,7 @@ public class TaskExecutor extends RpcEndpoint implements TaskExecutorGateway {
 		final Task task = taskSlotTable.getTask(executionAttemptID);
 
 		if (task != null) {
+			//触发 Checkpoint 屏障 Barrier
 			task.triggerCheckpointBarrier(checkpointId, checkpointTimestamp, checkpointOptions, advanceToEndOfEventTime);
 
 			return CompletableFuture.completedFuture(Acknowledge.get());
@@ -799,6 +801,9 @@ public class TaskExecutor extends RpcEndpoint implements TaskExecutorGateway {
 		}
 	}
 
+
+	//TaskManager 收到 notifyCheckpointComplete 消息后触发 task 的 notifyCheckpointComplete 方法并最终调用到 task 上的所有
+	// operator 的 notifyCheckpointComplete。这样一次完整的 Checkpoint 过程就结束了。
 	@Override
 	public CompletableFuture<Acknowledge> confirmCheckpoint(
 			ExecutionAttemptID executionAttemptID,

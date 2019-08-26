@@ -106,6 +106,7 @@ public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
 		final long barrierId = receivedBarrier.getId();
 
 		// fast path for single channel cases
+		//如果是只有一个输入流
 		if (totalNumberOfInputChannels == 1) {
 			if (barrierId > currentCheckpointId) {
 				// new checkpoint
@@ -117,8 +118,10 @@ public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
 
 		boolean checkpointAborted = false;
 
-		// -- general code path for multiple input channels --
+		//如果是多个输入流
 
+		// -- general code path for multiple input channels --
+		//如果收到的 Barrier 大于 0
 		if (numBarriersReceived > 0) {
 			// this is only true if some alignment is already progress and was not canceled
 
@@ -126,8 +129,12 @@ public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
 				// regular case
 				onBarrier(channelIndex);
 			}
+			//todo：这里会不会出现这种情况（checkpoint 时间间隔设置的较短，但是状态较大，一次 checkpoint 需要的时间比较久，
+			// checkpoint 处于未完成状态，但总是接收到新的 checkpoint 请求，这样就一直处于 checkpoint 状态，那么就会导致从没有生成
+			// 完整的 checkpoint）？？？
 			else if (barrierId > currentCheckpointId) {
 				// we did not complete the current checkpoint, another started before
+				//当前的 checkpoint 还没有完成呢，你咋又来了一个新的 checkpoint 请求
 				LOG.warn("{}: Received checkpoint barrier for checkpoint {} before completing current checkpoint {}. " +
 						"Skipping current checkpoint.",
 					taskName,
@@ -135,16 +142,19 @@ public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
 					currentCheckpointId);
 
 				// let the task know we are not completing this
+				//然后通知 task 会取消当前的 checkpoint，因为接收到了一个新的 checkpoint
 				notifyAbort(currentCheckpointId,
 					new CheckpointException(
 						"Barrier id: " + barrierId,
 						CheckpointFailureReason.CHECKPOINT_DECLINED_SUBSUMED));
 
 				// abort the current checkpoint
+				//丢弃当前的 checkpoint
 				releaseBlocksAndResetBarriers();
 				checkpointAborted = true;
 
 				// begin a the new checkpoint
+				//开始一个新的 checkpoint
 				beginNewAlignment(barrierId, channelIndex);
 			}
 			else {
@@ -152,6 +162,7 @@ public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
 				return false;
 			}
 		}
+		//之前如果还没有收到 Barrier，新来的 Barrier id 大于之前的 Barrier id，那么这意味着这是一个新的 checkpoint 请求的第一个过来的 barrier
 		else if (barrierId > currentCheckpointId) {
 			// first barrier of a new checkpoint
 			beginNewAlignment(barrierId, channelIndex);
@@ -164,6 +175,7 @@ public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
 
 		// check if we have all barriers - since canceled checkpoints always have zero barriers
 		// this can only happen on a non canceled checkpoint
+		//检查是否所有的 barrier 都到齐了（和输入流都个数一致）
 		if (numBarriersReceived + numClosedChannels == totalNumberOfInputChannels) {
 			// actually trigger checkpoint
 			if (LOG.isDebugEnabled()) {
@@ -174,6 +186,7 @@ public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
 			}
 
 			releaseBlocksAndResetBarriers();
+			//开始执行 checkpoint
 			notifyCheckpoint(receivedBarrier, bufferedBytes, latestAlignmentDurationNanos);
 			return true;
 		}
@@ -192,6 +205,8 @@ public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
 	}
 
 	/**
+	 * 阻塞该输入流通道，从该通道接收 barrier
+	 *
 	 * Blocks the given channel index, from which a barrier has been received.
 	 *
 	 * @param channelIndex The channel index to block.

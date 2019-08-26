@@ -31,6 +31,8 @@ import org.slf4j.LoggerFactory;
 import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
+ * HighAvailabilityMode ZOOKEEPER 模式下 JobManager 的 CheckpointIDCounter 实例
+ *
  * {@link CheckpointIDCounter} instances for JobManagers running in {@link HighAvailabilityMode#ZOOKEEPER}.
  *
  * <p>Each counter creates a ZNode:

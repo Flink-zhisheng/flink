@@ -22,6 +22,7 @@ import org.apache.flink.runtime.jobgraph.JobStatus;
 
 /**
  * A checkpoint ID counter.
+ * checkpoint ID 计数器
  */
 public interface CheckpointIDCounter {
 

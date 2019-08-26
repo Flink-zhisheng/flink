@@ -956,6 +956,8 @@ public class Execution implements AccessExecution, Archiveable<ArchivedExecution
 	}
 
 	/**
+	 * 通知 task，checkpoint 完成了
+	 *
 	 * Notify the task of this execution about a completed checkpoint.
 	 *
 	 * @param checkpointId of the completed checkpoint

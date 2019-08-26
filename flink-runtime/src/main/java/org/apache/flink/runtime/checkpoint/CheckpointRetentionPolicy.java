@@ -22,16 +22,23 @@ import org.apache.flink.annotation.Internal;
 
 /**
  * Policy for whether checkpoints are retained after a job terminates.
+ * 作业终止后是否保留 checkpoint 的策略
  */
 @Internal
 public enum CheckpointRetentionPolicy {
 
-	/** Checkpoints should be retained on cancellation and failure. */
+	/** Checkpoints should be retained on cancellation and failure.
+	 *  在作业取消和失败时应该保留 Checkpoint
+	 * */
 	RETAIN_ON_CANCELLATION,
 
-	/** Checkpoints should be retained on failure, but not on cancellation. */
+	/** Checkpoints should be retained on failure, but not on cancellation.
+	 *  Checkpoint 应该在失败时保留，而不是在取消时保留
+	 * */
 	RETAIN_ON_FAILURE,
 
-	/** Checkpoints should always be cleaned up when an application reaches a terminal state. */
+	/** Checkpoints should always be cleaned up when an application reaches a terminal state.
+	 *  当应用程序到达终端状态时，清理 Checkpoint
+	 * */
 	NEVER_RETAIN_AFTER_TERMINATION;
 }

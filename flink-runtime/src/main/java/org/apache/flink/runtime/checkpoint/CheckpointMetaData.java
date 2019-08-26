@@ -22,6 +22,7 @@ import java.io.Serializable;
 
 /**
  * Encapsulates all the meta data for a checkpoint.
+ * checkpoint 的元数据，包含 checkpointId 和 timestamp
  */
 public class CheckpointMetaData implements Serializable {
 

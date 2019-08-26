@@ -589,6 +589,7 @@ public class ExecutionGraph implements AccessExecutionGraph {
 			}
 		);
 
+		//ExecutionGraph 创建 CheckpointCoordinator
 		// create the coordinator that triggers and commits checkpoints and holds the state
 		checkpointCoordinator = new CheckpointCoordinator(
 			jobInformation.getJobId(),

@@ -22,6 +22,7 @@ import org.apache.flink.util.Preconditions;
 
 /**
  * Base class for checkpoint related exceptions.
+ * checkpoint 相关的异常
  */
 public class CheckpointException extends Exception {
 

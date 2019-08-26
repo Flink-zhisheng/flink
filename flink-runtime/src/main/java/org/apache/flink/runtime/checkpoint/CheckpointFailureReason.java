@@ -20,6 +20,7 @@ package org.apache.flink.runtime.checkpoint;
 
 /**
  * Various reasons why a checkpoint was failure.
+ * checkpoint 失败的原因
  */
 public enum CheckpointFailureReason {
 

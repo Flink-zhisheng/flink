@@ -433,6 +433,7 @@ public class CheckpointCoordinator {
 	/**
 	 * Triggers a new standard checkpoint and uses the given timestamp as the checkpoint
 	 * timestamp.
+	 * 触发一个新的标准检查点，并使用给定的时间戳作为检查点时间戳
 	 *
 	 * @param timestamp The timestamp for the checkpoint.
 	 * @param isPeriodic Flag indicating whether this triggered checkpoint is
@@ -465,6 +466,7 @@ public class CheckpointCoordinator {
 			throw new IllegalArgumentException("Only synchronous savepoints are allowed to advance the watermark to MAX.");
 		}
 
+		//多个检查条件，只有都满足的时候，检查点的触发请求才会执行
 		// make some eager pre-checks
 		synchronized (lock) {
 			// abort if the coordinator has been shutdown in the meantime
@@ -493,6 +495,7 @@ public class CheckpointCoordinator {
 			}
 		}
 
+		//检查需要被触发 checkpoint 的 task 是否都处于运行状态，如果有不满足条件的 Task，则不会触发检查点，抛出异常
 		// check if all tasks that we need to trigger are running.
 		// if not, abort the checkpoint
 		Execution[] executions = new Execution[tasksToTrigger.length];
@@ -545,6 +548,7 @@ public class CheckpointCoordinator {
 			try {
 				// this must happen outside the coordinator-wide lock, because it communicates
 				// with external services (in HA mode) and may block for a while.
+				//生成 checkpointID
 				checkpointID = checkpointIdCounter.getAndIncrement();
 
 				checkpointStorageLocation = props.isSavepoint() ?
@@ -560,6 +564,7 @@ public class CheckpointCoordinator {
 				throw new CheckpointException(CheckpointFailureReason.EXCEPTION, t);
 			}
 
+			//创建 PendingCheckpoint 对象，表示一个待处理的 Checkpoint
 			final PendingCheckpoint checkpoint = new PendingCheckpoint(
 				job,
 				checkpointID,
@@ -641,6 +646,7 @@ public class CheckpointCoordinator {
 						checkpointStorageLocation.getLocationReference());
 
 				// send the messages to the tasks that trigger their checkpoint
+				//发送消息给 task 以真正触发检查点
 				for (Execution execution: executions) {
 					if (props.isSynchronous()) {
 						execution.triggerSynchronousSavepoint(checkpointID, timestamp, checkpointOptions, advanceToEndOfTime);
@@ -1003,10 +1009,12 @@ public class CheckpointCoordinator {
 
 	// --------------------------------------------------------------------------------------------
 	//  Checkpoint State Restoring
+	//  Checkpoint State 的恢复
 	// --------------------------------------------------------------------------------------------
 
 	/**
 	 * Restores the latest checkpointed state.
+	 * 恢复最新的 Checkpoint state
 	 *
 	 * @param tasks Map of job vertices to restore. State for these vertices is
 	 * restored via {@link Execution#setInitialState(JobManagerTaskRestore)}.
@@ -1105,6 +1113,7 @@ public class CheckpointCoordinator {
 
 	/**
 	 * Restore the state with given savepoint.
+	 * 根据给定的 savepoint 恢复状态
 	 *
 	 * @param savepointPointer The pointer to the savepoint.
 	 * @param allowNonRestored True if allowing checkpoint state that cannot be
@@ -1265,6 +1274,7 @@ public class CheckpointCoordinator {
 
 	/**
 	 * Make sure the minimum interval between checkpoints has passed
+	 * 确保 checkpoint 之间的最小间隔已经通过
 	 *
 	 * @throws CheckpointException If the minimum interval between checkpoints has not passed.
 	 */
@@ -1290,6 +1300,7 @@ public class CheckpointCoordinator {
 	}
 
 	private ScheduledFuture<?> scheduleTriggerWithDelay(long initDelay) {
+		//timer 里面运行 ScheduledTrigger 任务
 		return timer.scheduleAtFixedRate(
 			new ScheduledTrigger(),
 			initDelay, baseInterval, TimeUnit.MILLISECONDS);

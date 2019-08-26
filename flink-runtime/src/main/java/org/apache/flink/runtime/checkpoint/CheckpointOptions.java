@@ -28,6 +28,8 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
 /**
  * Options for performing the checkpoint.
  *
+ * 执行检查点的选项
+ *
  * <p>The {@link CheckpointProperties} are related and cover properties that
  * are only relevant at the {@link CheckpointCoordinator}. These options are
  * relevant at the {@link AbstractInvokable} instances running on task managers.

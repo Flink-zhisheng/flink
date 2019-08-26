@@ -31,6 +31,8 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 
 /**
+ * CheckpointBarrierHandler 对来自输入流的 checkpoint barrier 作出反应
+ *
  * The {@link CheckpointBarrierHandler} reacts to checkpoint barrier arriving from the input channels.
  * Different implementations may either simply track barriers, or block certain inputs on
  * barriers.

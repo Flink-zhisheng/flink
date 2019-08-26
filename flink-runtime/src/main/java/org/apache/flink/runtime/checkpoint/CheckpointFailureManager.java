@@ -30,6 +30,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
  * The checkpoint failure manager which centralized manage checkpoint failure processing logic.
+ * 集中管理 checkpoint 故障处理逻辑的 checkpoint 故障管理器
  */
 public class CheckpointFailureManager {
 

@@ -20,17 +20,18 @@ package org.apache.flink.runtime.checkpoint;
 
 /**
  * The type of checkpoint to perform.
+ * 要执行的检查点类型
  */
 public enum CheckpointType {
 
 	/** A checkpoint, full or incremental. */
-	CHECKPOINT(false, false),
+	CHECKPOINT(false, false),	//异步
 
 	/** A regular savepoint. */
-	SAVEPOINT(true, false),
+	SAVEPOINT(true, false),	//异步
 
 	/** A savepoint taken while suspending/terminating the job. */
-	SYNC_SAVEPOINT(true, true);
+	SYNC_SAVEPOINT(true, true);	//同步，暂停/终止作业时采取的保存点
 
 	private final boolean isSavepoint;
 
