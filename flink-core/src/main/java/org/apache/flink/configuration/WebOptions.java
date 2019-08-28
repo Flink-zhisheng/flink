@@ -127,6 +127,7 @@ public class WebOptions {
 
 	/**
 	 * Config parameter defining the number of checkpoints to remember for recent history.
+	 * 最近 checkpoint 的情况
 	 */
 	public static final ConfigOption<Integer> CHECKPOINTS_HISTORY_SIZE =
 		key("web.checkpoints.history")

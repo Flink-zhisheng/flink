@@ -139,6 +139,7 @@ public class StreamingJobGraphGenerator {
 		jobGraph = new JobGraph(jobID, streamGraph.getJobName());
 	}
 
+	//创建 JobGraph
 	private JobGraph createJobGraph() {
 
 		// make sure that all vertices start immediately
@@ -162,6 +163,7 @@ public class StreamingJobGraphGenerator {
 
 		setSlotSharingAndCoLocation();
 
+		//配置 Checkpoint
 		configureCheckpointing();
 
 		JobGraphGenerator.addUserArtifactEntries(streamGraph.getUserArtifacts(), jobGraph);
@@ -607,6 +609,7 @@ public class StreamingJobGraphGenerator {
 		}
 	}
 
+	//配置 Checkpoint
 	private void configureCheckpointing() {
 		CheckpointConfig cfg = streamGraph.getCheckpointConfig();
 
@@ -620,7 +623,10 @@ public class StreamingJobGraphGenerator {
 
 		// collect the vertices that receive "trigger checkpoint" messages.
 		// currently, these are all the sources
+		//triggerVertices 只包含那些作为 source 的节点
 		List<JobVertexID> triggerVertices = new ArrayList<>();
+
+		//ackVertices 和 commitVertices 均包含所有的节点
 
 		// collect the vertices that need to acknowledge the checkpoint
 		// currently, these are all vertices

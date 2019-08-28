@@ -42,15 +42,18 @@ public class CheckpointConfig implements java.io.Serializable {
 	private static final Logger LOG = LoggerFactory.getLogger(CheckpointConfig.class);
 
 	/** The default checkpoint mode: exactly once. */
+	//默认的 Checkpoint 模式就是 EXACTLY_ONCE
 	public static final CheckpointingMode DEFAULT_MODE = CheckpointingMode.EXACTLY_ONCE;
 
 	/** The default timeout of a checkpoint attempt: 10 minutes. */
 	public static final long DEFAULT_TIMEOUT = 10 * 60 * 1000;
 
 	/** The default minimum pause to be made between checkpoints: none. */
+	//checkpoint 之间的默认最小暂停时间: 0
 	public static final long DEFAULT_MIN_PAUSE_BETWEEN_CHECKPOINTS = 0;
 
 	/** The default limit of concurrently happening checkpoints: one. */
+	//同时执行 checkpoint 请求的个数，默认是 1
 	public static final int DEFAULT_MAX_CONCURRENT_CHECKPOINTS = 1;
 
 	public static final int UNDEFINED_TOLERABLE_CHECKPOINT_NUMBER = -1;
@@ -64,6 +67,7 @@ public class CheckpointConfig implements java.io.Serializable {
 	private long checkpointInterval = -1; // disabled
 
 	/** Maximum time checkpoint may take before being discarded. */
+	//checkpoint 超时时间，默认是 10 分钟，超过该时间，会丢弃此次 checkpoint
 	private long checkpointTimeout = DEFAULT_TIMEOUT;
 
 	/** Minimal pause between checkpointing attempts. */
@@ -81,6 +85,8 @@ public class CheckpointConfig implements java.io.Serializable {
 	/**
 	 * Task would not fail if there is an error in their checkpointing.
 	 *
+	 * checkpoint 失败的话，task 是否会失败（默认是不会失败）
+	 *
 	 * <p>{@link #tolerableCheckpointFailureNumber} would always overrule this deprecated field if they have conflicts.
 	 *
 	 * @deprecated Use {@link #tolerableCheckpointFailureNumber}.
@@ -92,6 +98,7 @@ public class CheckpointConfig implements java.io.Serializable {
 	private boolean preferCheckpointForRecovery = false;
 
 	/**
+	 * 能够容忍 checkpoint 失败的次数，默认值是 -1，意味着不能够容忍 checkpoint 失败
 	 * Determines the threshold that we tolerance declined checkpoint failure number.
 	 * The default value is -1 meaning undetermined and not set via {@link #setTolerableCheckpointFailureNumber(int)}.
 	 * */
@@ -128,6 +135,8 @@ public class CheckpointConfig implements java.io.Serializable {
 
 	/**
 	 * Gets the interval in which checkpoints are periodically scheduled.
+	 *
+	 * 获取 定时执行 Checkpoint 请求的时间，
 	 *
 	 * <p>This setting defines the base interval. Checkpoint triggering may be delayed by the settings
 	 * {@link #getMaxConcurrentCheckpoints()} and {@link #getMinPauseBetweenCheckpoints()}.

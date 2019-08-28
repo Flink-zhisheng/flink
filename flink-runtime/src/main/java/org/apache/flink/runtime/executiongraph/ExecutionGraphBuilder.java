@@ -74,6 +74,7 @@ import static org.apache.flink.util.Preconditions.checkNotNull;
 
 /**
  * Utility class to encapsulate the logic of building an {@link ExecutionGraph} from a {@link JobGraph}.
+ * 将 JobGraph 转成 ExecutionGraph 的工具类
  */
 public class ExecutionGraphBuilder {
 
@@ -234,6 +235,7 @@ public class ExecutionGraphBuilder {
 		}
 
 		// configure the state checkpointing
+		//配置 checkpoint
 		JobCheckpointingSettings snapshotSettings = jobGraph.getCheckpointingSettings();
 		if (snapshotSettings != null) {
 			List<ExecutionJobVertex> triggerVertices =

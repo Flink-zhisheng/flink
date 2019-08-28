@@ -1230,6 +1230,7 @@ public class ExecutionGraph implements AccessExecutionGraph {
 
 				// if we have checkpointed state, reload it into the executions
 				if (checkpointCoordinator != null) {
+					//从 CheckpointedState load 出上一个保存的状态
 					checkpointCoordinator.restoreLatestCheckpointedState(getAllVertices(), false, false);
 				}
 			}

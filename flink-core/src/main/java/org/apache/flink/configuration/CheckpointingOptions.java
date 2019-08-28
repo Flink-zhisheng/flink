@@ -23,6 +23,7 @@ import org.apache.flink.annotation.docs.Documentation;
 /**
  * A collection of all configuration options that relate to checkpoints
  * and savepoints.
+ * checkpoint 和 savepoint 的配置
  */
 public class CheckpointingOptions {
 
@@ -38,6 +39,7 @@ public class CheckpointingOptions {
 			.withDescription("The state backend to be used to store and checkpoint state.");
 
 	/** The maximum number of completed checkpoints to retain.*/
+	//要保证完整 checkpoint 的个数，默认是 1
 	public static final ConfigOption<Integer> MAX_RETAINED_CHECKPOINTS = ConfigOptions
 			.key("state.checkpoints.num-retained")
 			.defaultValue(1)
@@ -45,6 +47,8 @@ public class CheckpointingOptions {
 
 	/** Option whether the state backend should use an asynchronous snapshot method where
 	 * possible and configurable.
+	 *
+	 * checkpoint 是否异步
 	 *
 	 * <p>Some state backends may not support asynchronous snapshots, or only support
 	 * asynchronous snapshots, and ignore this option. */
@@ -59,6 +63,8 @@ public class CheckpointingOptions {
 	 * if possible. For an incremental checkpoint, only a diff from the previous
 	 * checkpoint is stored, rather than the complete checkpoint state.
 	 *
+	 * 是否使用增量的 checkpoint
+	 *
 	 * <p>Some state backends may not support incremental checkpoints and ignore
 	 * this option.*/
 	public static final ConfigOption<Boolean> INCREMENTAL_CHECKPOINTS = ConfigOptions
@@ -71,6 +77,8 @@ public class CheckpointingOptions {
 
 	/**
 	 * This option configures local recovery for this state backend. By default, local recovery is deactivated.
+	 *
+	 * 此选项为状态后端配置本地恢复。默认情况下，禁用本地恢复，MemoryStateBackend 不支持这种
 	 *
 	 * <p>Local recovery currently only covers keyed state backends.
 	 * Currently, MemoryStateBackend does not support local recovery and ignore
@@ -85,6 +93,8 @@ public class CheckpointingOptions {
 
 	/**
 	 * The config parameter defining the root directories for storing file-based state for local recovery.
+	 *
+	 * 定义根目录的路径，用于存储状态（用来做本地恢复的状态）
 	 *
 	 * <p>Local recovery currently only covers keyed state backends.
 	 * Currently, MemoryStateBackend does not support local recovery and ignore
@@ -103,6 +113,7 @@ public class CheckpointingOptions {
 
 	/** The default directory for savepoints. Used by the state backends that write
 	 * savepoints to file systems (MemoryStateBackend, FsStateBackend, RocksDBStateBackend). */
+	//存储 savepoint state 的目录
 	@Documentation.CommonOption(position = Documentation.CommonOption.POSITION_FAULT_TOLERANCE)
 	public static final ConfigOption<String> SAVEPOINT_DIRECTORY = ConfigOptions
 			.key("state.savepoints.dir")
@@ -113,6 +124,7 @@ public class CheckpointingOptions {
 
 	/** The default directory used for storing the data files and meta data of checkpoints in a Flink supported filesystem.
 	 * The storage path must be accessible from all participating processes/nodes(i.e. all TaskManagers and JobManagers).*/
+	//存储 checkpoint state 的目录
 	@Documentation.CommonOption(position = Documentation.CommonOption.POSITION_FAULT_TOLERANCE)
 	public static final ConfigOption<String> CHECKPOINTS_DIRECTORY = ConfigOptions
 			.key("state.checkpoints.dir")

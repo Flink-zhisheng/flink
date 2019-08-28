@@ -31,6 +31,8 @@ import java.util.List;
 import static org.apache.flink.util.Preconditions.checkArgument;
 
 /**
+ * standalone 模式下存储完整 Checkpoint
+ *
  * {@link CompletedCheckpointStore} for JobManagers running in {@link HighAvailabilityMode#NONE}.
  */
 public class StandaloneCompletedCheckpointStore implements CompletedCheckpointStore {

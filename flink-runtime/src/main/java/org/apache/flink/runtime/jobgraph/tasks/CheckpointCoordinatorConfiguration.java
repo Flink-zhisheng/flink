@@ -26,6 +26,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
+ * Checkpoint 协调者的配置，包括了定时 Checkpoint 的时间间隔、Checkpoint 超时时间、Checkpoint 之间暂停的时间间隔、
+ * 最大执行 Checkpoint 的个数、外部 checkpoint 的配置
+ *
  * Configuration settings for the {@link CheckpointCoordinator}. This includes the checkpoint
  * interval, the checkpoint timeout, the pause between checkpoints, the maximum number of
  * concurrent checkpoints and settings for externalized checkpoints.
@@ -50,6 +53,8 @@ public class CheckpointCoordinatorConfiguration implements Serializable {
 	private final CheckpointRetentionPolicy checkpointRetentionPolicy;
 
 	/**
+	 * 标识是否要 exactly once，如果是 false 则是 at least once
+	 *
 	 * Flag indicating whether exactly once checkpoint mode has been configured.
 	 * If <code>false</code>, at least once mode has been configured. This is
 	 * not a necessary attribute, because the checkpointing mode is only relevant
