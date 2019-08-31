@@ -1152,6 +1152,7 @@ public class Task implements Runnable, TaskActions, PartitionProducerStateProvid
 					FileSystemSafetyNet.setSafetyNetCloseableRegistryForThread(safetyNetCloseableRegistry);
 
 					try {
+						//真正的调用逻辑
 						boolean success = invokable.triggerCheckpoint(checkpointMetaData, checkpointOptions, advanceToEndOfEventTime);
 						if (!success) {
 							checkpointResponder.declineCheckpoint(
@@ -1174,6 +1175,7 @@ public class Task implements Runnable, TaskActions, PartitionProducerStateProvid
 					}
 				}
 			};
+			//异步执行
 			executeAsyncCallRunnable(
 					runnable,
 					String.format("Checkpoint Trigger for %s (%s).", taskNameWithSubtask, executionId));

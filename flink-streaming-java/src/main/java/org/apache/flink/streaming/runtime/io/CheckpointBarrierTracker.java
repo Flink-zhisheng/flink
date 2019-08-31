@@ -37,6 +37,9 @@ import java.util.ArrayDeque;
  * which input channels. Once it has observed all checkpoint barriers for a checkpoint ID,
  * it notifies its listener of a completed checkpoint.
  *
+ * 这个 CheckpointBarrierTracker 和 CheckpointBarrierAligner 不一致，CheckpointBarrierTracker 不会堵塞住已经发送 barrier 的通道
+ * 所以它不能保证 exactly-once 语义，只能保证 at least once 语义
+ *
  * <p>Unlike the {@link CheckpointBarrierAligner}, the BarrierTracker does not block the input
  * channels that have sent barriers, so it cannot be used to gain "exactly-once" processing
  * guarantees. It can, however, be used to gain "at least once" processing guarantees.
@@ -95,6 +98,7 @@ public class CheckpointBarrierTracker extends CheckpointBarrierHandler {
 		final long barrierId = receivedBarrier.getId();
 
 		// fast path for single channel trackers
+		//如果是只有一个输入流
 		if (totalNumberOfInputChannels == 1) {
 			notifyCheckpoint(receivedBarrier, 0, 0);
 			return false;
@@ -120,6 +124,7 @@ public class CheckpointBarrierTracker extends CheckpointBarrierHandler {
 		if (barrierCount != null) {
 			// add one to the count to that barrier and check for completion
 			int numBarriersNew = barrierCount.incrementBarrierCount();
+			//只有全部的 barrier 到齐了才会开始触发 checkpoint
 			if (numBarriersNew == totalNumberOfInputChannels) {
 				// checkpoint can be triggered (or is aborted and all barriers have been seen)
 				// first, remove this checkpoint and all all prior pending

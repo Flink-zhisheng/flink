@@ -36,6 +36,8 @@ import java.io.IOException;
  * {@link CheckpointBarrierAligner} keep tracks of received {@link CheckpointBarrier} on given
  * channels and controls the alignment, by deciding which channels should be blocked and when to
  * release blocked channels.
+ *
+ * 保证 EXACTLY_ONCE
  */
 @Internal
 public class CheckpointBarrierAligner extends CheckpointBarrierHandler {
