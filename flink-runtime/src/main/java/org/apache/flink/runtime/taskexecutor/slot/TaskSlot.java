@@ -32,6 +32,8 @@ import java.util.Map;
 /**
  * Container for multiple {@link Task} belonging to the same slot. A {@link TaskSlot} can be in one
  * of the following states:
+ *
+ * TaskSlot 的状态有：Free、Releasing、Allocated、Active
  * <ul>
  *     <li>Free - The slot is empty and not allocated to a job</li>
  *     <li>Releasing - The slot is about to be freed after it has become empty.</li>

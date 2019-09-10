@@ -22,6 +22,8 @@ import org.apache.flink.runtime.jobgraph.JobStatus;
 
 /**
  * The status of an application.
+ *
+ * Flink 应用程序的状态
  */
 public enum ApplicationStatus {
 

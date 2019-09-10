@@ -20,6 +20,8 @@ package org.apache.flink.runtime.jobgraph;
 
 /**
  * Possible states of a job once it has been accepted by the job manager.
+ *
+ * job 的状态（JobManager 调度该 Job 的时候该 Job 的状态）
  */
 public enum JobStatus {
 
@@ -27,6 +29,7 @@ public enum JobStatus {
 	CREATED(TerminalState.NON_TERMINAL),
 
 	/** Some tasks are scheduled or running, some may be pending, some may be finished. */
+	//job 为 RUNNING 时，其实并不代表着这个 Job 就真的运行起来了
 	RUNNING(TerminalState.NON_TERMINAL),
 
 	/** The job has failed and is currently waiting for the cleanup to complete. */
